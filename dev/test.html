@@ -1,0 +1,7 @@
+<!doctype html><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1">
+<title>窓の試し表示</title>
+<!-- 手元で見るとき：リポジトリの直下で python3 build.py → python3 -m http.server 8765 → http://localhost:8765/dev/test.html -->
+<style>body{margin:0;font-family:sans-serif;background:#F2EDE3}.band{background:#1C2338;padding:40px 28px}.band2{padding:40px 28px}iframe{width:100%;border:0;display:block}</style>
+<div class=band><iframe src="../_site/index.html?part=next" style="height:300px"></iframe></div>
+<div class=band2><iframe src="../_site/index.html?part=all&bg=kinari" style="height:300px"></iframe></div>
+<script>addEventListener('message',function(e){var d=e.data;if(!d||d.type!=='yfk-height')return;document.querySelectorAll('iframe').forEach(function(f){if(f.contentWindow===e.source)f.style.height=d.h+'px'})})</script>
