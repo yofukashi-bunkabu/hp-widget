@@ -11,7 +11,7 @@ STUDIO で作る夜更文化部の HP に、Embed（埋め込み）ボックス�
 |---|---|
 | `?part=next` | 次の会（最大3件。始まった会は自動で消える） |
 | `?part=journal` | note「美術館制覇記」の最新3本 |
-| `?part=stats` | 開いた会の回数・記録した館の数（`stats_min` 回を超えたら表示） |
+| `?part=stats` | 開いた会の回数・記録した館の数（`stats_min` 回以上になったら表示） |
 | `?part=all` | 全部（既定） |
 | `&bg=kinari` / `&bg=none` | 生成りの地／透明の地（既定は濃藍） |
 
