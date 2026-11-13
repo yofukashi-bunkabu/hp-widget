@@ -114,7 +114,7 @@
     "price": 500,
     "peatix": "https://peatix.com/event/5271499",
     "tunagate": "https://tunagate.com/circle/224201/events/642756",
-    "published": false
+    "published": true
   },
   {
     "id": "2026-12-06_eshi",
@@ -127,7 +127,7 @@
     "price": 500,
     "peatix": "https://peatix.com/event/5272879",
     "tunagate": "https://tunagate.com/circle/224201/events/643052",
-    "published": false
+    "published": true
   },
   {
     "id": "2026-12-12_heianbutsu",
@@ -140,6 +140,19 @@
     "price": 500,
     "peatix": "https://peatix.com/event/5272887",
     "tunagate": "https://tunagate.com/circle/224201/events/643057",
-    "published": false
+    "published": true
+  },
+  {
+    "id": "2026-12-13_kogei",
+    "no": "10",
+    "date": "2026-12-13",
+    "start": "10:00",
+    "title": "芭蕉の深川から／ミニチュアと民藝へ",
+    "place": "芭蕉記念館 → たばこと塩の博物館 → 日本民藝館",
+    "genre": "美術館",
+    "price": 500,
+    "peatix": "https://peatix.com/event/5272892",
+    "tunagate": "https://tunagate.com/circle/224201/events/643062",
+    "published": true
   }
 ]
