@@ -154,5 +154,18 @@
     "peatix": "https://peatix.com/event/5272892",
     "tunagate": "https://tunagate.com/circle/224201/events/643062",
     "published": true
+  },
+  {
+    "id": "2026-12-20_toguri",
+    "no": "11",
+    "date": "2026-12-20",
+    "start": "10:00",
+    "title": "佐賀・長崎の／やきもの展",
+    "place": "戸栗美術館（渋谷・松濤）",
+    "genre": "美術館",
+    "price": 500,
+    "peatix": "https://peatix.com/event/5278350",
+    "tunagate": "https://tunagate.com/circle/224201/events/644420",
+    "published": true
   }
 ]
