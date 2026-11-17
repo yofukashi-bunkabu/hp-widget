@@ -7,5 +7,6 @@
   "journal_series": "美術館制覇記",
   "max_events": 3,
   "max_articles": 3,
-  "stats_min": 5
+  "stats_min": 5,
+  "tunagate_fee": 500
 }

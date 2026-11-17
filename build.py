@@ -33,7 +33,18 @@ def is_https(url, host):
     return isinstance(url, str) and re.match(rf"^https://([a-z0-9-]+\.)*{re.escape(host)}/", url) is not None
 
 
-def load_events(today):
+def tunagate_price(e, fee):
+    """つなげーとで申し込んだときに払う額。つなげーとは利用料（fee）が足されるので Peatix と金額が違う。
+    events.json に price_tunagate があればそれを使う。"""
+    if "price_tunagate" in e:
+        return e["price_tunagate"]
+    price = e.get("price")
+    if isinstance(price, int) and isinstance(fee, int) and is_https(e.get("tunagate"), "tunagate.com"):
+        return price + fee
+    return None
+
+
+def load_events(today, fee=None):
     events = json.loads((ROOT / "data/events.json").read_text(encoding="utf-8"))
     upcoming, held = [], set()
     for e in events:
@@ -48,6 +59,7 @@ def load_events(today):
                 "place": e.get("place", ""),
                 "genre": e.get("genre", ""),
                 "price": e.get("price"),
+                "price_tunagate": tunagate_price(e, fee),
                 "peatix": e["peatix"] if is_https(e.get("peatix"), "peatix.com") else "",
                 "tunagate": e["tunagate"] if is_https(e.get("tunagate"), "tunagate.com") else "",
             })
@@ -91,7 +103,7 @@ def main():
     now = datetime.now(JST)
     today = args.today or now.strftime("%Y-%m-%d")
 
-    upcoming, held = load_events(today)
+    upcoming, held = load_events(today, cfg.get("tunagate_fee"))
 
     try:
         articles = load_journal(cfg)

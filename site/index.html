@@ -129,6 +129,10 @@ section > .lab { display: block; margin-bottom: 12px; }
     return s;
   }
   // 「／」はバナーと同じ改行位置
+  function yen(n) {
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "円";
+  }
+
   function titleNode(t) {
     var d = el("div", "title");
     t.split("／").forEach(function (line, i) {
@@ -162,9 +166,13 @@ section > .lab { display: block; margin-bottom: 12px; }
         var body = el("div", "body");
         if (e.genre) body.appendChild(el("div", "genre", e.genre));
         body.appendChild(titleNode(e.title));
-        var place = e.place || "";
-        if (typeof e.price === "number") place += (place ? "　" : "") + "参加費 " + e.price + "円";
-        if (place) body.appendChild(el("div", "place", place));
+        if (e.place) body.appendChild(el("div", "place", e.place));
+        if (typeof e.price === "number") {
+          var fee = "参加費 " + yen(e.price);
+          // つなげーとは利用料が足されて金額が変わるので、申込欄と同じ額を並べて出す
+          if (typeof e.price_tunagate === "number" && e.price_tunagate !== e.price) fee += "（つなげーとは " + yen(e.price_tunagate) + "）";
+          body.appendChild(el("div", "place", fee));
+        }
         li.appendChild(body);
         var btns = el("div", "btns");
         if (e.peatix) btns.appendChild(link(e.peatix, "btn", "Peatix で予約"));
