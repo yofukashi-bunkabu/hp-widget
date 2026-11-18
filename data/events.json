@@ -168,5 +168,18 @@
     "peatix": "https://peatix.com/event/5278350",
     "tunagate": "https://tunagate.com/circle/224201/events/644420",
     "published": true
+  },
+  {
+    "id": "2027-01-16_okyo",
+    "no": "12",
+    "date": "2027-01-16",
+    "start": "09:30",
+    "title": "円山応挙／リアルの先へ",
+    "place": "江戸東京博物館（両国）",
+    "genre": "美術館",
+    "price": 500,
+    "peatix": "https://peatix.com/event/5280693",
+    "tunagate": "https://tunagate.com/circle/224201/events/644463",
+    "published": true
   }
 ]
