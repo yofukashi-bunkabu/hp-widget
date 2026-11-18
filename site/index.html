@@ -19,7 +19,8 @@
 .hero nav { position: absolute; right: max(18px, env(safe-area-inset-right)); top: 26px; display: flex; gap: 12px; font-family: var(--min); font-size: 13px; letter-spacing: .24em; }
 .hero nav a { color: var(--yogiri); text-decoration: none; }
 .hero nav a:hover { color: var(--kinari); }
-.hero .bld { position: absolute; left: 50%; bottom: 66px; width: min(860px, 150vw); transform: translateX(-50%); opacity: .14; pointer-events: none; -webkit-mask-image: linear-gradient(to top, #000 55%, transparent); mask-image: linear-gradient(to top, #000 55%, transparent); }
+.hero .photo { position: absolute; inset: 0; background: url(assets/hero_tobikan.jpg) center 40% / cover no-repeat; filter: grayscale(1) contrast(1.1) brightness(.9); opacity: .2; pointer-events: none; -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 75%, transparent 100%); mask-image: linear-gradient(to bottom, transparent 0%, #000 30%, #000 75%, transparent 100%); }
+.hero .credit { position: absolute; right: max(14px, env(safe-area-inset-right)); bottom: 76px; font-family: var(--goth); font-size: 9.5px; letter-spacing: .04em; color: var(--yogiri); opacity: .7; }
 .hero .ring { position: absolute; left: 50%; top: 48%; width: min(300px, 72vw); aspect-ratio: 1; transform: translate(-50%, -50%); border: 1px solid var(--gekko); border-radius: 50%; opacity: .35; }
 .hero h1 { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); margin: 0; height: 340px; font-size: clamp(25px, 4.2vw, 30px); line-height: 2; letter-spacing: .18em; font-weight: 500; }
 .hero .name { position: absolute; left: 0; right: 0; bottom: 118px; text-align: center; font-size: 13px; letter-spacing: .34em; color: var(--yogiri); }
@@ -93,12 +94,13 @@
 <!-- 1 トップ -->
 <div class="hero">
   <div class="arc a1"></div><div class="arc a2"></div>
-  <img class="bld" src="assets/museum.svg" alt="">
+  <div class="photo" role="img" aria-label="東京都美術館の外観"></div>
   <a class="logo" href="./" aria-label="夜更文化部 トップ"><img src="assets/logo.svg" alt=""></a>
   <nav class="v" aria-label="ページの中"><a href="#flow">流れ</a><a href="#first">はじめて</a><a href="#journal">記録</a><a href="#sched">次の会</a><a href="#host">主催</a><a href="map/">地図</a></nav>
   <div class="ring"></div>
   <h1 class="v">週に<span class="tcy">1</span>回、<br>美術館へ行く<br>社会人の部活。</h1>
   <div class="name">夜更文化部<span>YOFUKASHI BUNKABU</span></div>
+  <p class="credit">写真：東京都美術館（Matthide127 / CC0）</p>
   <div class="curve"></div>
 </div>
 <div class="fv">
