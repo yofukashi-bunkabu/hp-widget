@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>夜更文化部 次の会</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=DM+Mono&family=Zen+Kaku+Gothic+New:wght@400;500&family=Zen+Old+Mincho:wght@500&display=swap">
+<style>
+/* ブランドカラー「夜×月光」。月光は一滴だけ（線と小さな印）に使う */
+:root {
+  --ai: #1C2338; --kinari: #F2EDE3; --gekko: #E6CF86; --yogiri: #8C93A3; --haiai: #5E6578;
+  --min: "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --goth: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --num: "Cormorant Garamond", "Times New Roman", serif;
+  --lab: "DM Mono", ui-monospace, Menlo, monospace;
+}
+/* ?bg=ai（濃藍の帯に置く・既定）／?bg=kinari（生成りの帯）／?bg=none（透明） */
+body { --bg: var(--ai); --fg: var(--kinari); --sub: var(--yogiri); --line: rgba(242,237,227,.18); --btn-bg: transparent; }
+body.kinari { --bg: var(--kinari); --fg: var(--ai); --sub: var(--haiai); --line: rgba(28,35,56,.16); }
+body.none { --bg: transparent; }
+/* 生成りの地では月光が読めないので、見出しの英字だけ濃藍にする */
+body.kinari .lab b { color: var(--ai); }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--goth); font-feature-settings: "palt"; letter-spacing: .04em;
+  -webkit-font-smoothing: antialiased;
+}
+.wrap { padding: 4px 0 8px; }
+.lab { font-family: var(--lab); font-size: 10px; letter-spacing: .24em; color: var(--sub); }
+.lab b { color: var(--gekko); font-weight: 400; }
+a { color: inherit; }
+
+/* 次の会 */
+.ev { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.ev li {
+  display: grid; grid-template-columns: 74px 1fr; gap: 6px 16px;
+  padding: 18px 0; border-bottom: 1px solid var(--line);
+}
+.date .d { font-family: var(--num); font-size: 34px; line-height: 1; letter-spacing: .02em; }
+.date .w { font-family: var(--lab); font-size: 10px; letter-spacing: .18em; color: var(--sub); margin-top: 6px; }
+.body { min-width: 0; }
+.genre { font-size: 11px; color: var(--sub); letter-spacing: .12em; }
+.genre::before { content: "─ "; color: var(--gekko); }
+.title { font-family: var(--min); font-weight: 500; font-size: 17px; line-height: 1.55; letter-spacing: .06em; margin: 4px 0 2px; text-wrap: balance; }
+.place { font-size: 12px; color: var(--sub); }
+.btns { grid-column: 2; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+.btn {
+  display: inline-block; text-decoration: none; font-size: 12px; letter-spacing: .14em;
+  padding: 9px 14px; border: 1px solid var(--fg); line-height: 1; white-space: nowrap;
+}
+.btn:hover { background: var(--fg); color: var(--bg); }
+.more { margin: 14px 0 0; font-size: 12px; color: var(--sub); line-height: 2; }
+.more a { text-underline-offset: 3px; text-decoration-color: var(--gekko); }
+.empty { padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.empty p { font-family: var(--min); font-size: 16px; margin: 0 0 8px; }
+.empty small { font-size: 12px; color: var(--sub); line-height: 1.9; display: block; }
+
+/* 記録 */
+.jr { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.jr li { border-bottom: 1px solid var(--line); }
+.jr a { display: grid; grid-template-columns: 74px 1fr; gap: 16px; padding: 14px 0; text-decoration: none; }
+.jr .jd { font-family: var(--lab); font-size: 10px; letter-spacing: .14em; color: var(--sub); padding-top: 4px; }
+.jr .jt { font-family: var(--min); font-size: 15px; line-height: 1.6; }
+.jr a:hover .jt { text-decoration: underline; text-decoration-color: var(--gekko); text-underline-offset: 4px; }
+
+/* 数字 */
+.st { display: flex; gap: 36px; flex-wrap: wrap; }
+.st div { min-width: 0; }
+.st .n { font-family: var(--num); font-size: 52px; line-height: 1; }
+.st .n small { font-family: var(--min); font-size: 15px; margin-left: 4px; }
+.st .c { font-size: 11px; color: var(--sub); letter-spacing: .14em; margin-top: 6px; }
+
+section + section { margin-top: 34px; }
+section > .lab { display: block; margin-bottom: 12px; }
+
+/* 広い幅（PC）：日付｜題名｜ボタンを1行に */
+@media (min-width: 720px) {
+  .ev li { grid-template-columns: 96px 1fr auto; align-items: center; gap: 0 28px; padding: 20px 0; }
+  .date .d { font-size: 40px; }
+  .title { font-size: 19px; }
+  .btns { grid-column: 3; margin: 0; flex-direction: column; align-items: stretch; }
+  .btn { text-align: center; }
+  .jr a { grid-template-columns: 96px 1fr; gap: 28px; }
+}
+/* せまい幅（スマホ）：ボタンは横いっぱい */
+@media (max-width: 380px) {
+  .ev li { grid-template-columns: 1fr; }
+  .date { display: flex; align-items: baseline; gap: 10px; }
+  .btns { grid-column: 1; }
+  .btn { flex: 1; text-align: center; }
+}
+</style>
+</head>
+<body>
+<div class="wrap" id="app" aria-live="polite"></div>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var part = q.get("part") || "all";            // next / journal / stats / all
+  var bg = q.get("bg");
+  if (bg === "kinari" || bg === "none") document.body.classList.add(bg);
+  var app = document.getElementById("app");
+  var WEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function link(href, cls, text) {
+    var a = el("a", cls, text);
+    a.href = href; a.target = "_blank"; a.rel = "noopener";
+    return a;
+  }
+  // 日本時間の「YYYY-MM-DD HH:MM」
+  function nowJST() {
+    return new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 16).replace("T", " ");
+  }
+  function label(en, ja) {
+    var s = el("span", "lab");
+    s.appendChild(el("b", null, en));
+    s.appendChild(document.createTextNode("　" + ja));
+    return s;
+  }
+  // 「／」はバナーと同じ改行位置
+  function yen(n) {
+    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "円";
+  }
+
+  function titleNode(t) {
+    var d = el("div", "title");
+    t.split("／").forEach(function (line, i) {
+      if (i) d.appendChild(document.createElement("br"));
+      d.appendChild(document.createTextNode(line));
+    });
+    return d;
+  }
+
+  function renderNext(data) {
+    var sec = el("section");
+    sec.appendChild(label("SCHEDULE", "次の会"));
+    var now = nowJST();
+    // 始まった会は出さない（毎朝の更新が止まっても、古い会が残らない）
+    var all = (data.next || []).filter(function (e) { return e.date + " " + (e.start || "23:59") > now; });
+    var list = all.slice(0, data.max_events || 3);
+    var rest = all.length - list.length;
+    if (!list.length) {
+      var box = el("div", "empty");
+      box.appendChild(el("p", null, "次の会は、ただいま準備中です。"));
+      box.appendChild(el("small", null, "Peatix のグループかつなげーとのサークルをフォローすると、新しい会のお知らせが届きます。"));
+      sec.appendChild(box);
+    } else {
+      var ul = el("ul", "ev");
+      list.forEach(function (e) {
+        var li = el("li");
+        var date = el("div", "date");
+        date.appendChild(el("div", "d", e.date.slice(5).replace("-", ".")));
+        date.appendChild(el("div", "w", WEEK[new Date(e.date + "T12:00:00Z").getUTCDay()] + (e.start ? "  " + e.start : "")));
+        li.appendChild(date);
+        var body = el("div", "body");
+        if (e.genre) body.appendChild(el("div", "genre", e.genre));
+        body.appendChild(titleNode(e.title));
+        if (e.place) body.appendChild(el("div", "place", e.place));
+        if (typeof e.price === "number") {
+          var fee = "参加費 " + yen(e.price);
+          // つなげーとは利用料が足されて金額が変わるので、申込欄と同じ額を並べて出す
+          if (typeof e.price_tunagate === "number" && e.price_tunagate !== e.price) fee += "（つなげーとは " + yen(e.price_tunagate) + "）";
+          body.appendChild(el("div", "place", fee));
+        }
+        li.appendChild(body);
+        var btns = el("div", "btns");
+        if (e.peatix) btns.appendChild(link(e.peatix, "btn", "Peatix で予約"));
+        if (e.tunagate) btns.appendChild(link(e.tunagate, "btn", "つなげーとで予約"));
+        li.appendChild(btns);
+        ul.appendChild(li);
+      });
+      sec.appendChild(ul);
+    }
+    var more = el("p", "more");
+    more.appendChild(document.createTextNode(!all.length ? "フォローはこちらから。" : rest > 0 ? "ほかに " + rest + " 件の会があります。" : "これからの会は、予約ページにもまとめています。"));
+    more.appendChild(document.createElement("br"));
+    more.appendChild(link(data.links.peatix_group, null, "Peatix のグループ"));
+    more.appendChild(document.createTextNode("　／　"));
+    more.appendChild(link(data.links.tunagate_circle, null, "つなげーと のサークル"));
+    sec.appendChild(more);
+    return sec;
+  }
+
+  function renderJournal(data) {
+    var items = (data.journal && data.journal.latest) || [];
+    if (!items.length && !data.links.note_url) return null;
+    var sec = el("section");
+    sec.appendChild(label("JOURNAL", "これまでの記録"));
+    if (items.length) {
+      var ul = el("ul", "jr");
+      items.forEach(function (a) {
+        var li = el("li");
+        var x = link(a.link, null, null);
+        x.appendChild(el("span", "jd", (a.date || "").replace(/-/g, ".")));
+        x.appendChild(el("span", "jt", a.title));
+        li.appendChild(x);
+        ul.appendChild(li);
+      });
+      sec.appendChild(ul);
+    }
+    if (data.links.note_url) {
+      var more = el("p", "more");
+      more.appendChild(link(data.links.note_url, null, "記録をすべて note で読む"));
+      sec.appendChild(more);
+    }
+    return sec;
+  }
+
+  function renderStats(data) {
+    var s = data.stats || {};
+    if (!s.show) return null;
+    var sec = el("section");
+    sec.appendChild(label("RECORD", "これまで"));
+    var box = el("div", "st");
+    [[s.held, "回", "開いた会"], [s.venues, "館", "記録した美術館・博物館"]].forEach(function (r) {
+      if (!r[0]) return;
+      var d = el("div");
+      var n = el("div", "n", String(r[0]));
+      n.appendChild(el("small", null, r[1]));
+      d.appendChild(n);
+      d.appendChild(el("div", "c", r[2]));
+      box.appendChild(d);
+    });
+    sec.appendChild(box);
+    return sec;
+  }
+
+  // 埋め込み先（STUDIO）に高さを知らせる
+  function report() {
+    var h = Math.ceil(document.documentElement.scrollHeight);
+    try { parent.postMessage({ type: "yfk-height", part: part, h: h }, "*"); } catch (e) {}
+  }
+  if ("ResizeObserver" in window) new ResizeObserver(report).observe(document.body);
+  window.addEventListener("load", report);
+
+  fetch("../data.json", { cache: "no-cache" })
+    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(function (data) {
+      var parts = part === "all" ? ["next", "journal", "stats"] : [part];
+      parts.forEach(function (p) {
+        var s = p === "next" ? renderNext(data) : p === "journal" ? renderJournal(data) : p === "stats" ? renderStats(data) : null;
+        if (s) app.appendChild(s);
+      });
+      report();
+    })
+    .catch(function () {
+      var box = el("div", "empty");
+      box.appendChild(el("p", null, "次の会は、予約ページでご覧いただけます。"));
+      var more = el("small");
+      more.appendChild(link("https://peatix.com/group/16564403", null, "Peatix のグループ"));
+      more.appendChild(document.createTextNode("　／　"));
+      more.appendChild(link("https://tunagate.com/circle/224201", null, "つなげーと のサークル"));
+      box.appendChild(more);
+      app.appendChild(box);
+      report();
+    });
+})();
+</script>
+</body>
+</html>

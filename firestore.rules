@@ -1,14 +1,12 @@
 rules_version = '2';
 // 夜更けの地図（site/map/）の守り。Firebase コンソールの Firestore →「ルール」にこの全文を貼って「公開」する。
 // ・記録（reviews）は、書いた本人だけが読める・直せる・消せる
-// ・「参加者に公開」（visibility == 'members'）の記録は、合言葉を入れた参加者（members）だけが読める
-// ・合言葉（config/join）はだれも読めない。members を作るときにルールの中でだけ照らし合わせる
+// ・「みんなに公開」（visibility == 'public'）の記録は、ログインしていない人も読める（2026-11-18 秋輝の決定）
 // ・管理者（admins）はコンソールで手で作る。管理者は公開の記録だけを消せる（自分だけの記録は管理者も読めない）
 service cloud.firestore {
   match /databases/{database}/documents {
     function signedIn() { return request.auth != null; }
     function me() { return request.auth.uid; }
-    function isMember() { return signedIn() && exists(/databases/$(database)/documents/members/$(me())); }
     function isAdmin() { return signedIn() && exists(/databases/$(database)/documents/admins/$(me())); }
     function str(v, lo, hi) { return v is string && v.size() >= lo && v.size() <= hi; }
 
@@ -23,16 +21,16 @@ service cloud.firestore {
         && str(d.exhibition, 0, 80)
         && d.stars is int && d.stars >= 0 && d.stars <= 5
         && str(d.text, 0, 1000)
-        && d.visibility in ['private', 'members']
-        // 公開するのは合言葉を入れた参加者だけ。公開には表示名が要る
-        && (d.visibility == 'private' || (isMember() && str(d.nickname, 1, 20)));
+        && d.visibility in ['private', 'public']
+        // 公開には表示名が要る
+        && (d.visibility == 'private' || str(d.nickname, 1, 20));
     }
 
     match /reviews/{id} {
-      allow read: if signedIn() && (resource.data.uid == me() || (resource.data.visibility == 'members' && isMember()));
+      allow read: if resource.data.visibility == 'public' || (signedIn() && resource.data.uid == me());
       allow create: if signedIn() && validReview(request.resource.data);
       allow update: if signedIn() && resource.data.uid == me() && validReview(request.resource.data);
-      allow delete: if signedIn() && (resource.data.uid == me() || (isAdmin() && resource.data.visibility == 'members'));
+      allow delete: if signedIn() && (resource.data.uid == me() || (isAdmin() && resource.data.visibility == 'public'));
     }
 
     match /profiles/{uid} {
@@ -42,21 +40,10 @@ service cloud.firestore {
         && str(request.resource.data.nickname, 1, 20);
     }
 
-    match /members/{uid} {
-      allow read, delete: if signedIn() && uid == me();
-      allow create: if signedIn() && uid == me()
-        && request.resource.data.keys().hasOnly(['code', 'joinedAt'])
-        && request.resource.data.code == get(/databases/$(database)/documents/config/join).data.code;
-      allow update: if false;
-    }
-
     match /admins/{uid} {
       allow read: if signedIn() && uid == me();
       allow write: if false;
     }
 
-    match /config/{doc} {
-      allow read, write: if false;
-    }
   }
 }

@@ -1,12 +1,26 @@
-# 夜更文化部 HP の「自動で動く窓」
+# 夜更文化部のホームページ
 
-STUDIO で作る夜更文化部の HP に、Embed（埋め込み）ボックスで表示する小さなページです。
-次の会・最新の記録（note）・これまでの数字を、毎朝自動で入れ替えます。STUDIO 側は一度貼れば触りません。
+夜更文化部（よふかしぶんかぶ）の HP です。GitHub Pages で公開しています（2026-11-18 から。それまでは STUDIO に埋め込む「窓」だけのリポジトリ `hp-widget` でした）。
 
-- 公開先：https://yofukashi-bunkabu.github.io/hp-widget/
-- 更新：毎朝6時（日本時間）と、`main` に push したとき（GitHub Actions「窓を更新」）
+- 公開先：https://yofukashi-bunkabu.github.io/
+- 更新：毎朝6時（日本時間）と、`main` に push したとき（GitHub Actions「窓を更新」）。会を公開して `data/events.json` に足すと、トップの「次の会」と「会の一覧」が自動で増える
+- 文章の正本：`../夜更文化部/HP/構成と文章_v2.md`（8段）。デザインは A「夜の縦組み」
 
-## 表示の切り替え（URL の後ろに付ける）
+## ページ
+| パス | 中身 |
+|---|---|
+| `/` | トップ（8段：トップ／こんな人へ／1回の流れ／はじめての方へ／続いている記録／次の会／主催のこと／フッター） |
+| `/events/` | これからの会・これまでの会（`data/events.json` から作る） |
+| `/yoshu/` | 予習シートの見本（No.01 東京都美術館） |
+| `/journal/` | note「美術館制覇記」の記事（RSS から作る）と、地図の「みんなに公開」の口コミ |
+| `/map/` | 夜更けの地図（下の節） |
+| `/widget/` | 埋め込み用の小さな窓（旧 hp-widget のトップ。いまは使っていない） |
+
+## 作り
+- `site/` を `_site/` に写し、ページの中の `<!--@名前-->` を `build.py` が置き換える（`head`・`bar`・`foot` は `site/_parts/` の部品、`next1`・`next3`・`upcoming`・`past`・`journal3`・`journal`・`stats` などは中身）
+- 共通の見た目は `site/assets/site.css`。色はブランドカラー（濃藍・生成り・月光・夜霧・灰藍）
+
+## 窓（/widget/）の表示の切り替え（URL の後ろに付ける）
 | 付けるもの | 表示 |
 |---|---|
 | `?part=next` | 次の会（最大3件。始まった会は自動で消える） |
@@ -43,11 +57,11 @@ STUDIO で作る夜更文化部の HP に、Embed（埋め込み）ボックス�
 python3 build.py
 python3 -m http.server 8765
 ```
-http://localhost:8765/dev/test.html を開く（`python3 build.py --today 2026-12-20` で日付を変えて試せる）。
+http://localhost:8765/_site/ でHP、http://localhost:8765/dev/test.html で窓を見る（`python3 build.py --today 2026-12-20` で日付を変えて試せる）。
 
 ## 夜更けの地図（site/map/、2026-11-18〜）
-参加者が、行った美術館・博物館の記録と口コミを地図に残すページ。公開先は https://yofukashi-bunkabu.github.io/hp-widget/map/
+参加者が、行った美術館・博物館の記録と口コミを地図に残すページ。公開先は https://yofukashi-bunkabu.github.io/map/
 - 地図は OpenStreetMap（Leaflet）。館の一覧は `site/map/venues.json`（イベント候補ダッシュボードの `venues` から、名前・種類・地域・緯度経度・公式URLだけを書き出したもの）
 - ログインと保存は Firebase（Google ログイン＋Firestore）。準備の手順は `FIREBASE.md`、守りは `firestore.rules`
 - `site/map/firebase-config.js` が空のあいだは試し表示（ログインはまねだけ、記録はその端末の中だけ）
-- 口コミは「自分だけ」が既定。「参加者に公開」は、合言葉を入れた参加者だけが読める。名前・メールは保存しない（`site/map/privacy.html`）
+- 口コミは「自分だけ」が既定。「みんなに公開」にしたものは、ログインしていない人も読める（2026-11-18 秋輝の決定）。名前・メールは保存しない（`site/map/privacy.html`）

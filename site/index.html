@@ -1,270 +1,234 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="robots" content="noindex">
-<title>夜更文化部 次の会</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=DM+Mono&family=Zen+Kaku+Gothic+New:wght@400;500&family=Zen+Old+Mincho:wght@500&display=swap">
+<!--@head-->
+<title>夜更文化部｜どこを観ればいいか、予習1枚で分かる。</title>
+<meta name="description" content="美術館・博物館・古本屋・名画座へ、週に1回。主催が作った予習シートを1枚持って行き、観たあとに少しだけ感想を話す、社会人の部活です。一人参加・初心者歓迎、勧誘・営業はありません。">
+<meta property="og:title" content="夜更文化部（よふかしぶんかぶ）">
+<meta property="og:description" content="どこを観ればいいか、予習1枚で分かる。美術館・博物館へ週に1回、社会人の鑑賞の部活です。">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://yofukashi-bunkabu.github.io/">
 <style>
-/* ブランドカラー「夜×月光」。月光は一滴だけ（線と小さな印）に使う */
-:root {
-  --ai: #1C2338; --kinari: #F2EDE3; --gekko: #E6CF86; --yogiri: #8C93A3; --haiai: #5E6578;
-  --min: "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
-  --goth: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", sans-serif;
-  --num: "Cormorant Garamond", "Times New Roman", serif;
-  --lab: "DM Mono", ui-monospace, Menlo, monospace;
-}
-/* ?bg=ai（濃藍の帯に置く・既定）／?bg=kinari（生成りの帯）／?bg=none（透明） */
-body { --bg: var(--ai); --fg: var(--kinari); --sub: var(--yogiri); --line: rgba(242,237,227,.18); --btn-bg: transparent; }
-body.kinari { --bg: var(--kinari); --fg: var(--ai); --sub: var(--haiai); --line: rgba(28,35,56,.16); }
-body.none { --bg: transparent; }
-/* 生成りの地では月光が読めないので、見出しの英字だけ濃藍にする */
-body.kinari .lab b { color: var(--ai); }
-* { box-sizing: border-box; }
-html, body { margin: 0; }
-body {
-  background: var(--bg); color: var(--fg);
-  font-family: var(--goth); font-feature-settings: "palt"; letter-spacing: .04em;
-  -webkit-font-smoothing: antialiased;
-}
-.wrap { padding: 4px 0 8px; }
-.lab { font-family: var(--lab); font-size: 10px; letter-spacing: .24em; color: var(--sub); }
-.lab b { color: var(--gekko); font-weight: 400; }
-a { color: inherit; }
+/* トップだけの見た目（構成と文章_v2.md の8段 × デザイン A） */
+.hero { position: relative; height: clamp(560px, 82vh, 700px); background: var(--ai); color: var(--kinari); overflow: hidden; }
+.hero .arc { position: absolute; border-radius: 50%; }
+.hero .a1 { width: 70vmax; height: 70vmax; left: -40vmax; top: -18vmax; background: var(--ai2); }
+.hero .a2 { width: 60vmax; height: 60vmax; right: -36vmax; top: 10vmax; background: #20283f; }
+.hero .logo { position: absolute; left: max(22px, env(safe-area-inset-left)); top: 22px; width: 78px; height: 78px; border: 1px solid var(--gekko); border-radius: 50%; display: grid; place-items: center; }
+.hero .logo img { height: 58px; }
+.hero nav { position: absolute; right: max(18px, env(safe-area-inset-right)); top: 26px; display: flex; gap: 12px; font-family: var(--min); font-size: 13px; letter-spacing: .24em; }
+.hero nav a { color: var(--yogiri); text-decoration: none; }
+.hero nav a:hover { color: var(--kinari); }
+.hero .ring { position: absolute; left: 50%; top: 48%; width: min(300px, 72vw); aspect-ratio: 1; transform: translate(-50%, -50%); border: 1px solid var(--gekko); border-radius: 50%; opacity: .35; }
+.hero h1 { position: absolute; left: 50%; top: 46%; transform: translate(-50%, -50%); margin: 0; height: 340px; font-size: clamp(25px, 4.2vw, 30px); line-height: 2; letter-spacing: .18em; font-weight: 500; }
+.hero .name { position: absolute; left: 0; right: 0; bottom: 118px; text-align: center; font-size: 13px; letter-spacing: .34em; color: var(--yogiri); }
+.hero .name span { display: block; font-family: var(--lab); font-size: 10px; margin-top: 6px; }
+.hero .curve { position: absolute; left: -40%; right: -40%; bottom: -330px; height: 400px; border-radius: 50%; background: var(--kinari); }
+.fv { padding: 4px 0 56px; }
+.fv .sub { font-size: 15.5px; line-height: 2.05; }
+.fv ul { list-style: none; margin: 18px 0 28px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.fv li { font-family: var(--goth); font-size: 12px; color: var(--haiai); border: 1px solid #1c233833; border-radius: 99px; padding: 5px 13px; line-height: 1.6; }
+.next1 { background: var(--ai); color: var(--kinari); padding: 22px; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; gap: 18px 22px; align-items: center; }
+.next1 .d { font-family: var(--num); font-size: 48px; line-height: 1; text-align: center; }
+.next1 .d small { display: block; font-family: var(--lab); font-size: 10px; letter-spacing: .14em; color: var(--gekko); margin-top: 8px; }
+.next1 .lab { color: var(--gekko); }
+.next1 .t { font-size: 16px; line-height: 1.6; margin: 6px 0 2px; }
+.next1 .pl { font-family: var(--goth); font-size: 12px; color: var(--yogiri); }
+.next1 .btn { background: var(--kinari); color: var(--ai); border-color: var(--kinari); }
+.next1.empty { grid-template-columns: 1fr; }
+.next1.empty p { font-size: 14px; margin: 0; }
+.next1.empty .btn { justify-self: start; }
+@media (max-width: 640px) { .next1 { grid-template-columns: auto minmax(0, 1fr); } .next1 .btn { grid-column: 1 / -1; } }
 
-/* 次の会 */
-.ev { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.ev li {
-  display: grid; grid-template-columns: 74px 1fr; gap: 6px 16px;
-  padding: 18px 0; border-bottom: 1px solid var(--line);
-}
-.date .d { font-family: var(--num); font-size: 34px; line-height: 1; letter-spacing: .02em; }
-.date .w { font-family: var(--lab); font-size: 10px; letter-spacing: .18em; color: var(--sub); margin-top: 6px; }
-.body { min-width: 0; }
-.genre { font-size: 11px; color: var(--sub); letter-spacing: .12em; }
-.genre::before { content: "─ "; color: var(--gekko); }
-.title { font-family: var(--min); font-weight: 500; font-size: 17px; line-height: 1.55; letter-spacing: .06em; margin: 4px 0 2px; text-wrap: balance; }
-.place { font-size: 12px; color: var(--sub); }
-.btns { grid-column: 2; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
-.btn {
-  display: inline-block; text-decoration: none; font-size: 12px; letter-spacing: .14em;
-  padding: 9px 14px; border: 1px solid var(--fg); line-height: 1; white-space: nowrap;
-}
-.btn:hover { background: var(--fg); color: var(--bg); }
-.more { margin: 14px 0 0; font-size: 12px; color: var(--sub); line-height: 2; }
-.more a { text-underline-offset: 3px; text-decoration-color: var(--gekko); }
-.empty { padding: 22px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-.empty p { font-family: var(--min); font-size: 16px; margin: 0 0 8px; }
-.empty small { font-size: 12px; color: var(--sub); line-height: 1.9; display: block; }
+.foryou { overflow: hidden; }
+.foryou .moon { position: absolute; right: max(-40px, calc(50% - 480px)); top: 40px; width: 150px; height: 150px; border-radius: 50%; background: radial-gradient(circle at 35% 35%, #fff, #dcd6ca); opacity: .6; pointer-events: none; }
+.foryou .call { position: relative; font-size: clamp(19px, 3.4vw, 24px); line-height: 1.75; font-weight: 500; margin: 0 0 24px; }
+.foryou ul { position: relative; list-style: none; margin: 0 0 24px; padding: 0; }
+.foryou li { font-size: 14.5px; line-height: 1.8; padding: 11px 0; border-bottom: 1px dashed #1c233833; }
+.foryou li::before { content: "─ "; color: #b0902e; }
 
-/* 記録 */
-.jr { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.jr li { border-bottom: 1px solid var(--line); }
-.jr a { display: grid; grid-template-columns: 74px 1fr; gap: 16px; padding: 14px 0; text-decoration: none; }
-.jr .jd { font-family: var(--lab); font-size: 10px; letter-spacing: .14em; color: var(--sub); padding-top: 4px; }
-.jr .jt { font-family: var(--min); font-size: 15px; line-height: 1.6; }
-.jr a:hover .jt { text-decoration: underline; text-decoration-color: var(--gekko); text-underline-offset: 4px; }
+.flow ol { list-style: none; margin: 0 0 30px; padding: 0; counter-reset: s; }
+.flow li { counter-increment: s; display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: 12px; padding: 18px 0; border-top: 1px solid #ffffff1f; }
+.flow li::before { content: "0" counter(s); font-family: var(--num); font-size: 34px; line-height: 1; color: var(--gekko); }
+.flow li b { display: block; font-size: 17px; font-weight: 500; margin-bottom: 6px; }
+.flow li span { font-family: var(--goth); font-size: 13.5px; line-height: 1.9; color: #d9d4ca; }
+.flow .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 10px; }
+.flow .shots a { display: block; text-decoration: none; }
+.flow .shots .img { aspect-ratio: 210 / 297; background: var(--kinari); overflow: hidden; }
+.flow .shots img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.flow .yoshu-mini { height: 100%; padding: 9% 9% 0; color: var(--ai); font-size: clamp(8px, 1.6vw, 11px); line-height: 1.7; }
+.flow .yoshu-mini b { display: block; font-size: 1.5em; line-height: 1.4; margin: 4px 0 8px; border-bottom: 1px solid var(--ai); padding-bottom: 6px; }
+.flow .yoshu-mini i { font-style: normal; font-family: var(--lab); font-size: .85em; color: var(--haiai); letter-spacing: .1em; }
+.flow .yoshu-mini p { margin: 0 0 6px; }
+.flow .shots span { display: block; font-family: var(--goth); font-size: 12px; color: var(--yogiri); margin-top: 8px; }
+.flow .time { font-family: var(--goth); font-size: 13px; line-height: 1.95; color: #d9d4ca; border-left: 2px solid var(--gekko); padding-left: 14px; margin: 24px 0 26px; }
 
-/* 数字 */
-.st { display: flex; gap: 36px; flex-wrap: wrap; }
-.st div { min-width: 0; }
-.st .n { font-family: var(--num); font-size: 52px; line-height: 1; }
-.st .n small { font-family: var(--min); font-size: 15px; margin-left: 4px; }
-.st .c { font-size: 11px; color: var(--sub); letter-spacing: .14em; margin-top: 6px; }
+.first ul.promise { list-style: none; margin: 0 0 34px; padding: 0; }
+.first .promise li { font-size: 15px; line-height: 1.7; padding: 9px 0 9px 24px; position: relative; }
+.first .promise li::before { content: ""; position: absolute; left: 2px; top: 18px; width: 8px; height: 8px; border-radius: 50%; background: var(--ai); }
+.first h3 { font-family: var(--lab); font-weight: 400; font-size: 10.5px; letter-spacing: .24em; color: var(--haiai); margin: 0 0 6px; }
+.first details { border-top: 1px solid #1c233833; padding: 15px 0; }
+.first details:last-of-type { border-bottom: 1px solid #1c233833; }
+.first summary { font-size: 15px; font-weight: 500; cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+.first summary::-webkit-details-marker { display: none; }
+.first summary::after { content: "＋"; color: var(--haiai); flex: none; }
+.first details[open] summary::after { content: "−"; }
+.first details p { font-family: var(--goth); font-size: 13.5px; line-height: 1.95; color: var(--haiai); margin: 10px 0 0; }
 
-section + section { margin-top: 34px; }
-section > .lab { display: block; margin-bottom: 12px; }
+.journal h3 { font-family: var(--lab); font-weight: 400; font-size: 10.5px; letter-spacing: .24em; color: var(--haiai); margin: 30px 0 10px; }
+.journal .more { margin-top: 14px; display: flex; flex-wrap: wrap; gap: 10px; }
 
-/* 広い幅（PC）：日付｜題名｜ボタンを1行に */
-@media (min-width: 720px) {
-  .ev li { grid-template-columns: 96px 1fr auto; align-items: center; gap: 0 28px; padding: 20px 0; }
-  .date .d { font-size: 40px; }
-  .title { font-size: 19px; }
-  .btns { grid-column: 3; margin: 0; flex-direction: column; align-items: stretch; }
-  .btn { text-align: center; }
-  .jr a { grid-template-columns: 96px 1fr; gap: 28px; }
-}
-/* せまい幅（スマホ）：ボタンは横いっぱい */
-@media (max-width: 380px) {
-  .ev li { grid-template-columns: 1fr; }
-  .date { display: flex; align-items: baseline; gap: 10px; }
-  .btns { grid-column: 1; }
-  .btn { flex: 1; text-align: center; }
-}
+.host .top { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 20px; align-items: center; margin-bottom: 20px; }
+.host .pic { width: 112px; height: 112px; border-radius: 50%; overflow: hidden; }
+.host .pic img { width: 100%; height: 100%; object-fit: cover; }
+.host .top p { font-size: 14.5px; margin: 0; }
+.host ul { list-style: none; margin: 0 0 20px; padding: 0; }
+.host ul li { font-family: var(--goth); font-size: 13.5px; line-height: 2; color: var(--haiai); }
+.host ul li::before { content: "─ "; color: #b0902e; }
 </style>
 </head>
 <body>
-<div class="wrap" id="app" aria-live="polite"></div>
-<script>
-(function () {
-  var q = new URLSearchParams(location.search);
-  var part = q.get("part") || "all";            // next / journal / stats / all
-  var bg = q.get("bg");
-  if (bg === "kinari" || bg === "none") document.body.classList.add(bg);
-  var app = document.getElementById("app");
-  var WEEK = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 
-  function el(tag, cls, text) {
-    var e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (text != null) e.textContent = text;
-    return e;
-  }
-  function link(href, cls, text) {
-    var a = el("a", cls, text);
-    a.href = href; a.target = "_blank"; a.rel = "noopener";
-    return a;
-  }
-  // 日本時間の「YYYY-MM-DD HH:MM」
-  function nowJST() {
-    return new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 16).replace("T", " ");
-  }
-  function label(en, ja) {
-    var s = el("span", "lab");
-    s.appendChild(el("b", null, en));
-    s.appendChild(document.createTextNode("　" + ja));
-    return s;
-  }
-  // 「／」はバナーと同じ改行位置
-  function yen(n) {
-    return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "円";
-  }
+<!-- 1 トップ -->
+<div class="hero">
+  <div class="arc a1"></div><div class="arc a2"></div>
+  <a class="logo" href="./" aria-label="夜更文化部 トップ"><img src="assets/logo.svg" alt=""></a>
+  <nav class="v" aria-label="ページの中"><a href="#flow">流れ</a><a href="#first">はじめて</a><a href="#journal">記録</a><a href="#sched">次の会</a><a href="#host">主催</a><a href="map/">地図</a></nav>
+  <div class="ring"></div>
+  <h1 class="v">どこを観ればいいか、<br>予習<span class="tcy">1</span>枚で分かる。</h1>
+  <div class="name">夜更文化部<span>YOFUKASHI BUNKABU</span></div>
+  <div class="curve"></div>
+</div>
+<div class="fv">
+  <div class="wrap">
+    <p class="sub">美術館・博物館・古本屋・名画座へ、週に1回。<br>主催が作った予習シートを1枚持って行き、観たあとに少しだけ感想を話す、社会人の部活です。</p>
+    <ul><li>一人で参加する前提です</li><li>詳しくなくて大丈夫</li><li>勧誘・営業はありません</li></ul>
+    <!--@next1-->
+  </div>
+</div>
 
-  function titleNode(t) {
-    var d = el("div", "title");
-    t.split("／").forEach(function (line, i) {
-      if (i) d.appendChild(document.createElement("br"));
-      d.appendChild(document.createTextNode(line));
-    });
-    return d;
-  }
+<!-- 2 こんな人へ -->
+<section class="sec foryou">
+  <div class="moon"></div>
+  <div class="wrap">
+    <div class="head"><span class="lab">FOR YOU</span></div>
+    <p class="call">仕事が忙しくて、<br>美術館や本から<br>遠ざかっている人へ。</p>
+    <ul>
+      <li>行きたかった展覧会が、気づけば終わっている</li>
+      <li>一人で行くと、「きれいだったな」で帰ってきてしまう</li>
+      <li>誰かと行きたいけれど、詳しい人ばかりの会は少し気後れする</li>
+    </ul>
+    <p>夜更文化部は、そんな人のための部活です。<br>毎週どこかの館へ行く予定があって、観て終わりにしない型があります。</p>
+  </div>
+</section>
 
-  function renderNext(data) {
-    var sec = el("section");
-    sec.appendChild(label("SCHEDULE", "次の会"));
-    var now = nowJST();
-    // 始まった会は出さない（毎朝の更新が止まっても、古い会が残らない）
-    var all = (data.next || []).filter(function (e) { return e.date + " " + (e.start || "23:59") > now; });
-    var list = all.slice(0, data.max_events || 3);
-    var rest = all.length - list.length;
-    if (!list.length) {
-      var box = el("div", "empty");
-      box.appendChild(el("p", null, "次の会は、ただいま準備中です。"));
-      box.appendChild(el("small", null, "Peatix のグループかつなげーとのサークルをフォローすると、新しい会のお知らせが届きます。"));
-      sec.appendChild(box);
-    } else {
-      var ul = el("ul", "ev");
-      list.forEach(function (e) {
-        var li = el("li");
-        var date = el("div", "date");
-        date.appendChild(el("div", "d", e.date.slice(5).replace("-", ".")));
-        date.appendChild(el("div", "w", WEEK[new Date(e.date + "T12:00:00Z").getUTCDay()] + (e.start ? "  " + e.start : "")));
-        li.appendChild(date);
-        var body = el("div", "body");
-        if (e.genre) body.appendChild(el("div", "genre", e.genre));
-        body.appendChild(titleNode(e.title));
-        if (e.place) body.appendChild(el("div", "place", e.place));
-        if (typeof e.price === "number") {
-          var fee = "参加費 " + yen(e.price);
-          // つなげーとは利用料が足されて金額が変わるので、申込欄と同じ額を並べて出す
-          if (typeof e.price_tunagate === "number" && e.price_tunagate !== e.price) fee += "（つなげーとは " + yen(e.price_tunagate) + "）";
-          body.appendChild(el("div", "place", fee));
-        }
-        li.appendChild(body);
-        var btns = el("div", "btns");
-        if (e.peatix) btns.appendChild(link(e.peatix, "btn", "Peatix で予約"));
-        if (e.tunagate) btns.appendChild(link(e.tunagate, "btn", "つなげーとで予約"));
-        li.appendChild(btns);
-        ul.appendChild(li);
-      });
-      sec.appendChild(ul);
-    }
-    var more = el("p", "more");
-    more.appendChild(document.createTextNode(!all.length ? "フォローはこちらから。" : rest > 0 ? "ほかに " + rest + " 件の会があります。" : "これからの会は、予約ページにもまとめています。"));
-    more.appendChild(document.createElement("br"));
-    more.appendChild(link(data.links.peatix_group, null, "Peatix のグループ"));
-    more.appendChild(document.createTextNode("　／　"));
-    more.appendChild(link(data.links.tunagate_circle, null, "つなげーと のサークル"));
-    sec.appendChild(more);
-    return sec;
-  }
+<!-- 3 1回の流れ -->
+<section class="sec dark flow" id="flow">
+  <div class="wrap">
+    <div class="head"><h2>一回の流れ</h2><span class="lab">HOW IT WORKS</span></div>
+    <p style="color:#d9d4ca">いつも同じ4つの流れで回ります。</p>
+    <ol>
+      <li><div><b>行く前に、予習シートを1枚</b><span>前日に、主催が作った予習シートをお送りします。見どころ3つと、感想のときに使う問いが1つ。行きの電車で5分で読めます。読まずに来ても大丈夫です。</span></div></li>
+      <li><div><b>会場では、それぞれのペースで</b><span>展示室の中は、みんなで一緒に回りません。手元にはワークシートを1枚。気になったものに丸をつけたり、ひとこと書いたりできます（鉛筆はこちらで用意します）。</span></div></li>
+      <li><div><b>観たあとに、少しだけ感想を</b><span>近くの喫茶店で30分ほど。いちばん気になったものを1つずつ話します。話すのが苦手なら、聞くだけでも大丈夫です。</span></div></li>
+      <li><div><b>行った館が、記録に残る</b><span>ワークシートの切手は切り取って持ち帰れます。行った館は「夜更けの地図」に残せて、会のことは note の「美術館制覇記」に書いていきます。</span></div></li>
+    </ol>
+    <div class="shots">
+      <a href="yoshu/"><div class="img"><div class="yoshu-mini"><i>YOSHU SHEET — No.01</i><b>東京都美術館の100年と、5つの「読み方」</b><p><i>見どころ3つ</i><br>1. 旧館と新館の100年<br>2. 高さ9cmの彫刻を、正面と横から<br>3. 2mの木彫に残る鑿の跡</p><p><i>感想タイムの問い</i><br>いちばん自分に近かった「読み方」は？</p></div></div><span>予習シート（見本を読む →）</span></a>
+      <a href="assets/worksheet.jpg"><div class="img"><img src="assets/worksheet.jpg" alt="会場で使うワークシートの見本（No.01 東京都美術館）" loading="lazy"></div><span>会場で使うワークシート</span></a>
+    </div>
+    <div class="time">時間の例（土曜の昼の会）<br>13:00 館の入口に集合 → 13:10〜14:40 鑑賞 → 14:50〜15:20 感想 → 15:20 ごろ解散<br>会によって時間は違います。くわしくは各回の予約ページへ。</div>
+    <a class="btn fill" href="#sched">次の会を見る</a>
+  </div>
+</section>
 
-  function renderJournal(data) {
-    var items = (data.journal && data.journal.latest) || [];
-    if (!items.length && !data.links.note_url) return null;
-    var sec = el("section");
-    sec.appendChild(label("JOURNAL", "これまでの記録"));
-    if (items.length) {
-      var ul = el("ul", "jr");
-      items.forEach(function (a) {
-        var li = el("li");
-        var x = link(a.link, null, null);
-        x.appendChild(el("span", "jd", (a.date || "").replace(/-/g, ".")));
-        x.appendChild(el("span", "jt", a.title));
-        li.appendChild(x);
-        ul.appendChild(li);
-      });
-      sec.appendChild(ul);
-    }
-    if (data.links.note_url) {
-      var more = el("p", "more");
-      more.appendChild(link(data.links.note_url, null, "記録をすべて note で読む"));
-      sec.appendChild(more);
-    }
-    return sec;
-  }
+<!-- 4 はじめての方へ -->
+<section class="sec first" id="first">
+  <div class="wrap">
+    <div class="head"><h2>はじめての方へ</h2><span class="lab">FIRST TIME</span></div>
+    <ul class="promise">
+      <li>一人で参加する前提の会です</li>
+      <li>勧誘・営業・出会い目的の会ではありません</li>
+      <li>詳しくなくて大丈夫です。正解を言う場ではありません</li>
+      <li>途中で帰っても大丈夫です</li>
+      <li>入館料は各自でお支払いください。参加費は会ごとに予約ページに書いています</li>
+    </ul>
+    <h3>FAQ</h3>
+    <details><summary>どんな人が来ていますか？</summary><p>美術館や本が好きだったけれど、仕事で少し離れていた社会人の方を想定しています。</p></details>
+    <details open><summary>感想を言わないといけませんか？</summary><p>言わなくて大丈夫です。聞くだけの参加も歓迎です。指名もしません。</p></details>
+    <details><summary>予習シートは読まないとだめですか？</summary><p>読まなくても楽しめます。読むと、少しだけ観る場所が見つけやすくなります。</p></details>
+    <details><summary>遅れて参加したり、感想の時間だけ抜けたりできますか？</summary><p>できます。予約ページのメッセージで一言ください。</p></details>
+    <details><summary>美術館以外にも行きますか？</summary><p>博物館、古本まつりや古書店、名画座にも行きます。</p></details>
+  </div>
+</section>
 
-  function renderStats(data) {
-    var s = data.stats || {};
-    if (!s.show) return null;
-    var sec = el("section");
-    sec.appendChild(label("RECORD", "これまで"));
-    var box = el("div", "st");
-    [[s.held, "回", "開いた会"], [s.venues, "館", "記録した美術館・博物館"]].forEach(function (r) {
-      if (!r[0]) return;
-      var d = el("div");
-      var n = el("div", "n", String(r[0]));
-      n.appendChild(el("small", null, r[1]));
-      d.appendChild(n);
-      d.appendChild(el("div", "c", r[2]));
-      box.appendChild(d);
-    });
-    sec.appendChild(box);
-    return sec;
-  }
+<!-- 5 続いている記録 -->
+<section class="sec paper journal" id="journal">
+  <div class="wrap">
+    <div class="head"><h2>続いている記録</h2><span class="lab">JOURNAL</span></div>
+    <p>主催は、行きたい館を毎週ひとつずつめぐっています。<br>会のある週もない週も、観たことは note に書いて残しています。</p>
+    <!--@stats-->
+    <h3>NOTE｜美術館制覇記</h3>
+    <!--@journal3-->
+    <div id="revs-box" hidden>
+      <h3>MAP｜夜更けの地図の口コミ</h3>
+      <div class="revs" id="revs"></div>
+    </div>
+    <div class="more">
+      <a class="btn" href="journal/">記録をすべて見る</a>
+      <a class="btn" href="map/">夜更けの地図を開く</a>
+    </div>
+  </div>
+</section>
 
-  // 埋め込み先（STUDIO）に高さを知らせる
-  function report() {
-    var h = Math.ceil(document.documentElement.scrollHeight);
-    try { parent.postMessage({ type: "yfk-height", part: part, h: h }, "*"); } catch (e) {}
-  }
-  if ("ResizeObserver" in window) new ResizeObserver(report).observe(document.body);
-  window.addEventListener("load", report);
+<!-- 6 次の会・予約 -->
+<section class="sec dark sched" id="sched">
+  <div class="wrap">
+    <div class="head"><h2>次の会</h2><span class="lab">SCHEDULE</span></div>
+    <p>次の会は、予約ページにまとめています。</p>
+    <!--@next3-->
+    <div class="btns">
+      <a class="btn" href="events/">会の一覧を見る</a>
+      <a class="btn" href="https://peatix.com/group/16564403">Peatix のグループ</a>
+      <a class="btn" href="https://tunagate.com/circle/224201">つなげーと のサークル</a>
+    </div>
+  </div>
+</section>
 
-  fetch("data.json", { cache: "no-cache" })
-    .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
-    .then(function (data) {
-      var parts = part === "all" ? ["next", "journal", "stats"] : [part];
-      parts.forEach(function (p) {
-        var s = p === "next" ? renderNext(data) : p === "journal" ? renderJournal(data) : p === "stats" ? renderStats(data) : null;
-        if (s) app.appendChild(s);
-      });
-      report();
-    })
-    .catch(function () {
-      var box = el("div", "empty");
-      box.appendChild(el("p", null, "次の会は、予約ページでご覧いただけます。"));
-      var more = el("small");
-      more.appendChild(link("https://peatix.com/group/16564403", null, "Peatix のグループ"));
-      more.appendChild(document.createTextNode("　／　"));
-      more.appendChild(link("https://tunagate.com/circle/224201", null, "つなげーと のサークル"));
-      box.appendChild(more);
-      app.appendChild(box);
-      report();
-    });
+<!-- 7 主催のこと -->
+<section class="sec host" id="host">
+  <div class="wrap">
+    <div class="head"><h2>主催のこと</h2><span class="lab">HOST</span></div>
+    <div class="top">
+      <div class="pic"><img src="assets/host.png" alt="主催のたいまつ" loading="lazy"></div>
+      <p>はじめまして、夜更文化部をはじめた、たいまつです。27歳、ふだんはWEBマーケティング（広告運用）の仕事をしています。</p>
+    </div>
+    <ul>
+      <li>地政学の本ばかり読んでいる人</li>
+      <li>90kgから27kg痩せた人</li>
+      <li>鶏胸肉料理が好きな人。サウナとシーシャとカラオケも好きです</li>
+    </ul>
+    <p>身体を鍛えるのと同じように、頭のほうも少しずつ鍛えたくて、この部活をはじめました。会は、わたしが自分で行きたい館をめぐる道に、一緒に乗ってもらう形です。だから、参加が一人でも会は開きます。筋トレの話も、本の話も、どちらでも歓迎です。</p>
+  </div>
+</section>
+
+<!--@foot-->
+<a class="fixed" href="#sched">次の会を見る</a>
+
+<script type="module">
+// 「みんなに公開」の口コミを3件だけ出す（地図の保存先が本番のときだけ。試し表示のあいだは出さない）
+import { makeStore } from "./map/store.js";
+const esc = (v) => String(v ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+(async () => {
+  const store = makeStore();
+  if (store.mode !== "live") return;
+  try {
+    await store.init(() => {});
+    const rows = (await store.publicReviews()).filter((r) => r.text).sort((a, b) => (b.date || "").localeCompare(a.date || "")).slice(0, 3);
+    if (!rows.length) return;
+    document.getElementById("revs").innerHTML = rows.map((r) => `<div class="rev"><b>${esc(r.placeName)}</b><span class="m">${esc((r.date || "").replaceAll("-", "."))}　${esc(r.nickname || "")}</span>${r.stars ? `<span class="s">${"★".repeat(r.stars)}</span>` : ""}<span class="t">${esc(r.text.length > 90 ? r.text.slice(0, 90) + "…" : r.text)}</span></div>`).join("");
+    document.getElementById("revs-box").hidden = false;
+  } catch (e) { console.error(e); }
 })();
 </script>
 </body>

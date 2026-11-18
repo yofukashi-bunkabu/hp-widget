@@ -1,0 +1,127 @@
+/* 夜更文化部 HP の共通の見た目。デザイン A「夜の縦組み」（HP/デザイン案/3案.png、2026-11-11 秋輝が採用）。
+   色は PROJECT.md「ブランドカラー」：濃藍55／生成り30／夜霧・灰藍10／月光5（月光は線・点・数字の一滴だけ。生成りの上に月光の文字は置かない） */
+:root {
+  --ai: #1C2338; --ai2: #232b44; --ai3: #313a57;
+  --kinari: #F2EDE3; --paper: #e9e3d6;
+  --gekko: #E6CF86; --yogiri: #8C93A3; --haiai: #5E6578;
+  --min: "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --goth: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif;
+  --num: "Cormorant Garamond", "Zen Old Mincho", serif;
+  --lab: "DM Mono", ui-monospace, monospace;
+  --wrap: 760px;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 64px; }
+body { margin: 0; background: var(--kinari); color: var(--ai); font-family: var(--min); font-feature-settings: "palt"; font-size: 15px; line-height: 2; -webkit-text-size-adjust: 100%; }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px solid var(--gekko); outline-offset: 3px; }
+.v { writing-mode: vertical-rl; }
+.tcy { text-combine-upright: all; }
+.lab { font-family: var(--lab); font-size: 10.5px; letter-spacing: .24em; }
+.wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 max(20px, env(safe-area-inset-left)); }
+.btn { display: inline-block; font-family: var(--goth); font-size: 13.5px; letter-spacing: .06em; line-height: 1.5; padding: 12px 20px; border: 1px solid currentColor; text-align: center; color: inherit; text-decoration: none; transition: background-color .15s, color .15s; }
+.btn:hover { background: #1c23380f; }
+.btn.fill { background: var(--ai); color: var(--kinari); border-color: var(--ai); }
+.dark .btn.fill, .btn.fill.on-dark { background: var(--kinari); color: var(--ai); border-color: var(--kinari); }
+.dark .btn:hover { background: #ffffff14; }
+.dark .btn.fill:hover { background: #fff; }
+
+/* 下層ページの上の帯 */
+.bar { background: var(--ai); color: var(--kinari); position: sticky; top: 0; z-index: 10; }
+.bar .in { max-width: 1080px; margin: 0 auto; display: flex; align-items: center; gap: 14px; padding: 8px max(16px, env(safe-area-inset-left)); min-height: 56px; }
+.bar .home { display: flex; align-items: center; gap: 10px; text-decoration: none; flex: none; }
+.bar .home img { height: 40px; width: auto; }
+.bar .home span { font-size: 15px; font-weight: 700; letter-spacing: .12em; }
+.bar nav { margin-left: auto; display: flex; gap: 4px 16px; flex-wrap: wrap; justify-content: flex-end; font-family: var(--goth); font-size: 12.5px; letter-spacing: .08em; }
+.bar nav a { text-decoration: none; color: var(--yogiri); padding: 4px 0; border-bottom: 1px solid transparent; }
+.bar nav a:hover, .bar nav a[aria-current="page"] { color: var(--kinari); border-bottom-color: var(--gekko); }
+@media (max-width: 640px) {
+  .bar .home span { display: none; }
+  .bar nav { gap: 2px 12px; font-size: 12px; }
+}
+
+/* 下層ページの見出し */
+.ph { background: var(--ai); color: var(--kinari); padding: 44px 0 52px; position: relative; overflow: hidden; }
+.ph::after { content: ""; position: absolute; right: -80px; top: -60px; width: 260px; height: 260px; border: 1px solid var(--gekko); border-radius: 50%; opacity: .3; }
+.ph h1 { margin: 6px 0 10px; font-size: clamp(26px, 5vw, 34px); font-weight: 500; letter-spacing: .14em; line-height: 1.4; }
+.ph .lab { color: var(--gekko); }
+.ph p { margin: 0; color: #d9d4ca; font-size: 14px; max-width: 34em; }
+
+/* 段 */
+.sec { padding: 64px 0; position: relative; }
+.sec.dark { background: var(--ai); color: var(--kinari); }
+.sec.paper { background: var(--paper); }
+.head { display: flex; flex-direction: column-reverse; gap: 6px; margin-bottom: 28px; padding-bottom: 14px; border-bottom: 1px solid var(--gekko); width: max-content; max-width: 100%; padding-right: 32px; }
+.head h2 { margin: 0; font-size: clamp(22px, 4vw, 27px); font-weight: 500; letter-spacing: .2em; line-height: 1.35; }
+.head .lab { color: var(--haiai); }
+.dark .head .lab { color: var(--gekko); }
+p { margin: 0 0 16px; }
+.muted { color: var(--haiai); font-family: var(--goth); font-size: 12.5px; line-height: 1.9; }
+.dark .muted { color: var(--yogiri); }
+.empty { font-family: var(--goth); font-size: 13px; color: var(--haiai); border: 1px dashed #1c233855; padding: 16px; margin: 0; }
+.dark .empty { color: var(--yogiri); border-color: #ffffff33; }
+.btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 14px; }
+
+/* 会のカード */
+.evs { display: grid; gap: 14px; }
+.ev { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 18px; background: var(--kinari); color: var(--ai); padding: 18px 18px 20px; border-left: 3px solid var(--ai); }
+.dark .ev { background: var(--ai2); color: var(--kinari); border-left-color: var(--gekko); }
+.ev-d { text-align: center; border-right: 1px solid #1c233822; padding-right: 14px; }
+.dark .ev-d { border-right-color: #ffffff22; }
+.ev-d b { display: block; font-family: var(--num); font-size: 38px; font-weight: 500; line-height: 1; }
+.ev-d span { font-family: var(--goth); font-size: 11.5px; color: var(--haiai); }
+.dark .ev-d span { color: var(--gekko); }
+.ev-b { min-width: 0; }
+.ev-b .lab { color: var(--haiai); }
+.dark .ev-b .lab { color: var(--yogiri); }
+.ev-b h3 { margin: 2px 0 4px; font-size: 18px; font-weight: 500; line-height: 1.55; letter-spacing: .04em; }
+.ev-b .pl { margin: 0; font-family: var(--goth); font-size: 13px; color: var(--haiai); }
+.dark .ev-b .pl { color: var(--yogiri); }
+.ev-b .meta { margin: 2px 0 0; font-family: var(--goth); font-size: 12px; color: var(--haiai); }
+.dark .ev-b .meta { color: var(--yogiri); }
+.ev .btn { padding: 9px 16px; font-size: 12.5px; }
+.ev.past { opacity: .85; border-left-color: var(--yogiri); }
+@media (max-width: 480px) {
+  .ev { grid-template-columns: 64px minmax(0, 1fr); gap: 12px; padding: 14px; }
+  .ev-d { padding-right: 10px; }
+  .ev-d b { font-size: 30px; }
+  .ev-b h3 { font-size: 16px; }
+}
+
+/* 記事 */
+.arts { display: grid; gap: 10px; }
+.art { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: baseline; background: var(--kinari); padding: 14px 16px; text-decoration: none; border-left: 2px solid var(--gekko); }
+.art i { font-style: normal; font-family: var(--lab); font-size: 11px; color: var(--haiai); }
+.art b { font-weight: 500; font-size: 14.5px; line-height: 1.6; }
+.art:hover b { text-decoration: underline; text-underline-offset: 4px; }
+
+/* みんなの口コミ（地図から） */
+.revs { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr)); }
+.rev { background: var(--kinari); padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+.rev b { font-size: 14.5px; font-weight: 500; }
+.rev .m { font-family: var(--goth); font-size: 11.5px; color: var(--haiai); }
+.rev .t { font-size: 13.5px; line-height: 1.85; white-space: pre-wrap; overflow-wrap: anywhere; }
+.rev .s { color: #b0902e; font-size: 12px; letter-spacing: .1em; }
+
+/* 数字 */
+.stats { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0 0 20px; }
+.stat { border: 1px solid #1c233833; padding: 14px; text-align: center; }
+.stat b { display: block; font-family: var(--num); font-size: 44px; font-weight: 500; line-height: 1; }
+.stat span { font-family: var(--goth); font-size: 11.5px; color: var(--haiai); }
+
+/* フッター */
+.foot { background: var(--ai); color: var(--yogiri); padding: 44px 0 110px; }
+.foot .logo { height: 72px; width: auto; margin-bottom: 18px; }
+.foot nav { display: flex; flex-wrap: wrap; gap: 8px 20px; font-family: var(--goth); font-size: 13px; margin-bottom: 16px; }
+.foot nav a { color: var(--kinari); text-decoration: none; }
+.foot nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.foot .ext { font-family: var(--lab); font-size: 11px; letter-spacing: .2em; }
+.foot p { font-family: var(--goth); font-size: 12px; line-height: 1.9; margin: 0 0 8px; }
+.foot small { font-family: var(--lab); font-size: 10.5px; letter-spacing: .2em; }
+
+/* スマホの下の固定ボタン */
+.fixed { position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom)); transform: translateX(-50%); width: min(400px, calc(100% - 32px)); background: var(--ai); color: var(--kinari); border: 1px solid var(--gekko); font-family: var(--goth); font-size: 13.5px; letter-spacing: .08em; text-align: center; padding: 13px; text-decoration: none; z-index: 9; }
+@media (min-width: 900px) { .fixed { display: none; } .foot { padding-bottom: 56px; } }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

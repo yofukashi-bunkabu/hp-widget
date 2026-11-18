@@ -3,11 +3,10 @@
 //
 // データの形（Firestore）
 //   reviews/{id}  : uid, venueId|null, placeName, lat, lng, date, exhibition, stars(0-5), text,
-//                   visibility('private'|'members'), nickname(公開のときだけ), createdAt, updatedAt
+//                   visibility('private'|'public'), nickname(公開のときだけ), createdAt, updatedAt
 //   profiles/{uid}: nickname（公開の口コミに出す名前。本名・メールは保存しない）
-//   members/{uid} : 合言葉を入れた参加者（code, joinedAt）。公開の口コミを読む・出すのに要る
 //   admins/{uid}  : 管理者（コンソールで秋輝が手で作る）
-//   config/join   : 合言葉（code）。だれも読めない。ルールの中でだけ照らし合わせる
+// 「みんなに公開」の口コミは、ログインしていない人も読める（2026-11-18 秋輝の決定）
 import { firebaseConfig } from "./firebase-config.js";
 
 const FB = "https://www.gstatic.com/firebasejs/10.12.2/";
@@ -25,7 +24,7 @@ export function clean(r) {
     exhibition: s(r.exhibition, LIMITS.exhibition),
     stars: Math.max(0, Math.min(5, parseInt(r.stars, 10) || 0)),
     text: s(r.text, LIMITS.text),
-    visibility: r.visibility === "members" ? "members" : "private",
+    visibility: r.visibility === "public" ? "public" : "private",
   };
   return out;
 }
@@ -45,25 +44,20 @@ class LocalStore {
   async signOut() { const d = this._load(); d.signedIn = false; this._save(d); this.user = null; this.onAuth(null); }
   async getProfile() { return this._load().profile || null; }
   async setProfile(nickname) { const d = this._load(); d.profile = { nickname: String(nickname).trim().slice(0, LIMITS.nickname) }; this._save(d); }
-  async isMember() { return !!this._load().member; }
-  async join(code) { if (String(code).trim() !== "よふけ") throw new Error("bad_code"); const d = this._load(); d.member = true; this._save(d); }
   async isAdmin() { return false; }
   async myReviews() { return (this._load().reviews || []).filter((r) => r.uid === this.user?.uid); }
-  async publicReviews() {
-    const mine = (this._load().reviews || []).filter((r) => r.visibility === "members");
-    return mine;
-  }
+  async publicReviews() { return (this._load().reviews || []).filter((r) => r.visibility === "public"); }
   async saveReview(id, data, nickname) {
     const d = this._load(); d.reviews = d.reviews || [];
     const now = new Date().toISOString();
     const r = { ...clean(data), uid: this.user.uid, updatedAt: now };
-    if (r.visibility === "members") r.nickname = nickname; else delete r.nickname;
+    if (r.visibility === "public") r.nickname = nickname; else delete r.nickname;
     if (id) { const i = d.reviews.findIndex((x) => x.id === id); if (i >= 0) d.reviews[i] = { ...d.reviews[i], ...r }; }
     else d.reviews.push({ ...r, id: "d" + Date.now().toString(36), createdAt: now });
     this._save(d);
   }
   async deleteReview(id) { const d = this._load(); d.reviews = (d.reviews || []).filter((x) => x.id !== id); this._save(d); }
-  async deleteAllMine() { const d = this._load(); d.reviews = []; delete d.profile; delete d.member; this._save(d); }
+  async deleteAllMine() { const d = this._load(); d.reviews = []; delete d.profile; this._save(d); }
 }
 
 /* ---------- 本番（Firebase） ---------- */
@@ -95,11 +89,6 @@ class FirebaseStore {
   async setProfile(nickname) {
     await this.F.setDoc(this._doc("profiles", this.user.uid), { nickname: String(nickname).trim().slice(0, LIMITS.nickname), updatedAt: this.F.serverTimestamp() });
   }
-  async isMember() { try { return (await this.F.getDoc(this._doc("members", this.user.uid))).exists(); } catch { return false; } }
-  async join(code) {
-    try { await this.F.setDoc(this._doc("members", this.user.uid), { code: String(code).trim(), joinedAt: this.F.serverTimestamp() }); }
-    catch { throw new Error("bad_code"); }
-  }
   async isAdmin() { try { return (await this.F.getDoc(this._doc("admins", this.user.uid))).exists(); } catch { return false; } }
   _rows(snap) { return snap.docs.map((d) => ({ id: d.id, ...d.data() })); }
   async myReviews() {
@@ -108,20 +97,19 @@ class FirebaseStore {
   }
   async publicReviews() {
     const F = this.F;
-    return this._rows(await F.getDocs(F.query(F.collection(this.db, "reviews"), F.where("visibility", "==", "members"), F.limit(500))));
+    return this._rows(await F.getDocs(F.query(F.collection(this.db, "reviews"), F.where("visibility", "==", "public"), F.limit(500))));
   }
   async saveReview(id, data, nickname) {
     const F = this.F;
     const r = { ...clean(data), uid: this.user.uid, updatedAt: F.serverTimestamp() };
-    if (r.visibility === "members") r.nickname = nickname; else r.nickname = F.deleteField();
+    if (r.visibility === "public") r.nickname = nickname; else r.nickname = F.deleteField();
     if (id) await F.updateDoc(this._doc("reviews", id), r);
-    else { if (r.visibility !== "members") delete r.nickname; await F.addDoc(F.collection(this.db, "reviews"), { ...r, createdAt: F.serverTimestamp() }); }
+    else { if (r.visibility !== "public") delete r.nickname; await F.addDoc(F.collection(this.db, "reviews"), { ...r, createdAt: F.serverTimestamp() }); }
   }
   async deleteReview(id) { await this.F.deleteDoc(this._doc("reviews", id)); }
   async deleteAllMine() {
     for (const r of await this.myReviews()) await this.deleteReview(r.id);
     await this.F.deleteDoc(this._doc("profiles", this.user.uid)).catch(() => {});
-    await this.F.deleteDoc(this._doc("members", this.user.uid)).catch(() => {});
   }
 }
 
