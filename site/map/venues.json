@@ -1,0 +1,681 @@
+[
+ {
+  "id": "v-aa36a6897ffc",
+  "name": "JAXA相模原キャンパス",
+  "short": "JAXA相模原",
+  "kind": "科学館",
+  "area": "相模原市中央区由野台",
+  "lat": 35.5583,
+  "lng": 139.3953,
+  "url": "https://www.isas.jaxa.jp/visitors/"
+ },
+ {
+  "id": "v-af26c7de4db8",
+  "name": "かわさき宙と緑の科学館",
+  "short": "宙と緑の科学館",
+  "kind": "科学館",
+  "area": "川崎市多摩区枡形（生田緑地内）",
+  "lat": 35.60852,
+  "lng": 139.56141,
+  "url": "https://www.nature-kawasaki.jp/"
+ },
+ {
+  "id": "v-aaf32b709dc7",
+  "name": "たばこと塩の博物館",
+  "short": "たば塩",
+  "kind": "博物館",
+  "area": "墨田区横川",
+  "lat": 35.7057,
+  "lng": 139.80854,
+  "url": "https://www.tabashio.jp/"
+ },
+ {
+  "id": "v-4dfff1bd34d2",
+  "name": "アーティゾン美術館",
+  "short": "アーティゾン",
+  "kind": "美術館",
+  "area": "中央区京橋",
+  "lat": 35.67875,
+  "lng": 139.77213,
+  "url": "https://www.artizon.museum/"
+ },
+ {
+  "id": "v-9badf286f6b3",
+  "name": "インターメディアテク",
+  "short": "IMT",
+  "kind": "博物館",
+  "area": "千代田区丸の内（KITTE内）",
+  "lat": 35.68003,
+  "lng": 139.76453,
+  "url": "https://www.intermediatheque.jp/"
+ },
+ {
+  "id": "v-e12b521d9bda",
+  "name": "三井記念美術館",
+  "short": "三井記念館",
+  "kind": "美術館",
+  "area": "中央区日本橋室町",
+  "lat": 35.68684,
+  "lng": 139.77307,
+  "url": "https://www.mitsui-museum.jp/"
+ },
+ {
+  "id": "v-72f18ffcfab7",
+  "name": "三鷹市山本有三記念館",
+  "short": "有三記念館",
+  "kind": "記念館",
+  "area": "三鷹市下連雀",
+  "lat": 35.69957,
+  "lng": 139.56765,
+  "url": "https://mitaka-sportsandculture.or.jp/yuzo/"
+ },
+ {
+  "id": "v-54e86f0d2ae8",
+  "name": "世田谷文学館",
+  "short": "世田谷文学館",
+  "kind": "文学館",
+  "area": "世田谷区南烏山",
+  "lat": 35.66692,
+  "lng": 139.60887,
+  "url": "https://www.setabun.or.jp/"
+ },
+ {
+  "id": "v-a0fd78ffeaba",
+  "name": "五島美術館",
+  "short": "五島美術館",
+  "kind": "美術館",
+  "area": "世田谷区上野毛",
+  "lat": 35.61244,
+  "lng": 139.63536,
+  "url": "https://www.gotoh-museum.or.jp/"
+ },
+ {
+  "id": "v-208cf9d0ebfc",
+  "name": "京都国立博物館",
+  "short": "京博",
+  "kind": "博物館",
+  "area": "京都市東山区茶屋町",
+  "lat": 34.9899,
+  "lng": 135.77286,
+  "url": "https://www.kyohaku.go.jp/"
+ },
+ {
+  "id": "v-2637a114eb69",
+  "name": "原鉄道模型博物館",
+  "short": "原鉄道模型",
+  "kind": "博物館",
+  "area": "横浜市西区高島",
+  "lat": 35.46315,
+  "lng": 139.62509,
+  "url": "https://www.hara-mrm.com/"
+ },
+ {
+  "id": "v-5e7bba457cd8",
+  "name": "台東区立一葉記念館",
+  "short": "一葉記念館",
+  "kind": "記念館",
+  "area": "台東区竜泉",
+  "lat": 35.72555,
+  "lng": 139.79281,
+  "url": "https://www.taitogeibun.net/ichiyo/"
+ },
+ {
+  "id": "v-766c2e62f2d0",
+  "name": "台東区立朝倉彫塑館",
+  "short": "朝倉彫塑館",
+  "kind": "記念館",
+  "area": "台東区谷中",
+  "lat": 35.72683,
+  "lng": 139.76854,
+  "url": "https://www.taitogeibun.net/asakura/"
+ },
+ {
+  "id": "v-773285031bc4",
+  "name": "国立公文書館",
+  "short": "公文書館",
+  "kind": "資料館",
+  "area": "千代田区北の丸公園",
+  "lat": 35.69026,
+  "lng": 139.75388,
+  "url": "https://www.archives.go.jp/"
+ },
+ {
+  "id": "v-1cd032e77403",
+  "name": "国立天文台 三鷹キャンパス",
+  "short": "天文台",
+  "kind": "科学館",
+  "area": "三鷹市大沢",
+  "lat": 35.6753,
+  "lng": 139.5383,
+  "url": "https://www.nao.ac.jp/access/mitaka/visit/"
+ },
+ {
+  "id": "v-76e33b2c474d",
+  "name": "国立映画アーカイブ",
+  "short": "映画アーカイブ",
+  "kind": "資料館",
+  "area": "中央区京橋",
+  "lat": 35.67557,
+  "lng": 139.77066,
+  "url": "https://www.nfaj.go.jp/"
+ },
+ {
+  "id": "v-a6c89e61da3d",
+  "name": "国立科学博物館",
+  "short": "科博",
+  "kind": "科学館",
+  "area": "台東区上野公園",
+  "lat": 35.7159,
+  "lng": 139.77669,
+  "url": "https://www.kahaku.go.jp/"
+ },
+ {
+  "id": "v-fa379d8127aa",
+  "name": "国立科学博物館附属自然教育園",
+  "short": "自然教育園",
+  "kind": "庭園・建築",
+  "area": "港区白金台",
+  "lat": 35.63853,
+  "lng": 139.71938,
+  "url": "https://ins.kahaku.go.jp/"
+ },
+ {
+  "id": "v-0848ec98ff96",
+  "name": "国立西洋美術館",
+  "short": "西美",
+  "kind": "美術館",
+  "area": "台東区上野公園",
+  "lat": 35.71555,
+  "lng": 139.77594,
+  "url": "https://www.nmwa.go.jp/"
+ },
+ {
+  "id": "v-3812b2281933",
+  "name": "國學院大學博物館",
+  "short": "國學院博物館",
+  "kind": "博物館",
+  "area": "渋谷区東",
+  "lat": 35.65622,
+  "lng": 139.7112,
+  "url": "https://museum.kokugakuin.ac.jp/"
+ },
+ {
+  "id": "v-890fbc8ae993",
+  "name": "大倉集古館",
+  "short": "大倉集古館",
+  "kind": "博物館",
+  "area": "港区虎ノ門",
+  "lat": 35.66692,
+  "lng": 139.74322,
+  "url": "https://www.shukokan.org/"
+ },
+ {
+  "id": "v-c3f67dd29df4",
+  "name": "子規庵",
+  "short": "子規庵",
+  "kind": "記念館",
+  "area": "台東区根岸",
+  "lat": 35.71988,
+  "lng": 139.78272,
+  "url": "https://shikian.or.jp/"
+ },
+ {
+  "id": "v-aeb68cf78fd6",
+  "name": "山種美術館",
+  "short": "山種美術館",
+  "kind": "美術館",
+  "area": "渋谷区広尾",
+  "lat": 35.65317,
+  "lng": 139.71364,
+  "url": "https://www.yamatane-museum.jp/"
+ },
+ {
+  "id": "v-66c05a0af3aa",
+  "name": "岡本太郎記念館",
+  "short": "岡本太郎記念館",
+  "kind": "記念館",
+  "area": "港区南青山",
+  "lat": 35.66127,
+  "lng": 139.71553,
+  "url": "https://taro-okamoto.or.jp/kinenkan/"
+ },
+ {
+  "id": "v-90e77f9445c2",
+  "name": "川崎市岡本太郎美術館",
+  "short": "岡本太郎美術館",
+  "kind": "美術館",
+  "area": "川崎市多摩区枡形（生田緑地内）",
+  "lat": 35.60791,
+  "lng": 139.55748,
+  "url": "https://www.taromuseum.jp/"
+ },
+ {
+  "id": "v-30a4c4037712",
+  "name": "川崎市立日本民家園",
+  "short": "日本民家園",
+  "kind": "庭園・建築",
+  "area": "川崎市多摩区枡形（生田緑地内）",
+  "lat": 35.6104,
+  "lng": 139.5573,
+  "url": "https://www.nihonminkaen.jp/"
+ },
+ {
+  "id": "v-5d9d9ff70017",
+  "name": "府中市美術館",
+  "short": "府中市美術館",
+  "kind": "美術館",
+  "area": "府中市浅間町（府中の森公園内）",
+  "lat": 35.67899,
+  "lng": 139.49218,
+  "url": "https://www.city.fuchu.tokyo.jp/art/"
+ },
+ {
+  "id": "v-5f19c607240c",
+  "name": "戸栗美術館",
+  "short": "戸栗美術館",
+  "kind": "美術館",
+  "area": "渋谷区松濤",
+  "lat": 35.66144,
+  "lng": 139.6928,
+  "url": "https://toguri-museum.or.jp/"
+ },
+ {
+  "id": "v-62446bf5d2a6",
+  "name": "文京区立森鷗外記念館",
+  "short": "鷗外記念館",
+  "kind": "記念館",
+  "area": "文京区千駄木",
+  "lat": 35.72485,
+  "lng": 139.76065,
+  "url": "https://moriogai-kinenkan.jp/"
+ },
+ {
+  "id": "v-9416152a3195",
+  "name": "新宿区立林芙美子記念館",
+  "short": "林芙美子館",
+  "kind": "記念館",
+  "area": "新宿区中井",
+  "lat": 35.71585,
+  "lng": 139.68427,
+  "url": "https://www.regasu-shinjuku.or.jp/rekishi/fumiko/"
+ },
+ {
+  "id": "v-22f750d71632",
+  "name": "新宿区立漱石山房記念館",
+  "short": "漱石山房",
+  "kind": "記念館",
+  "area": "新宿区早稲田南町",
+  "lat": 35.70394,
+  "lng": 139.72546,
+  "url": "https://soseki-museum.jp/"
+ },
+ {
+  "id": "v-ecc8c1d7ab66",
+  "name": "日本民藝館",
+  "short": "民藝館",
+  "kind": "美術館",
+  "area": "目黒区駒場",
+  "lat": 35.66082,
+  "lng": 139.67931,
+  "url": "https://mingeikan.or.jp/"
+ },
+ {
+  "id": "v-7c369f4d4689",
+  "name": "日本科学未来館",
+  "short": "未来館",
+  "kind": "科学館",
+  "area": "江東区青海",
+  "lat": 35.61924,
+  "lng": 139.77667,
+  "url": "https://www.miraikan.jst.go.jp/"
+ },
+ {
+  "id": "v-a16a9b2bfb97",
+  "name": "日本郵船歴史博物館",
+  "short": "郵船博物館",
+  "kind": "博物館",
+  "area": "横浜市中区海岸通",
+  "lat": 35.45036,
+  "lng": 139.63942,
+  "url": "https://www.museum.nyk.com/"
+ },
+ {
+  "id": "v-b94aba077826",
+  "name": "早稲田大学演劇博物館",
+  "short": "エンパク",
+  "kind": "博物館",
+  "area": "新宿区西早稲田",
+  "lat": 35.7095,
+  "lng": 139.7212,
+  "url": "https://www.waseda.jp/enpaku/"
+ },
+ {
+  "id": "v-2e7238759910",
+  "name": "明治大学博物館",
+  "short": "明大博物館",
+  "kind": "博物館",
+  "area": "千代田区神田駿河台",
+  "lat": 35.6987,
+  "lng": 139.76215,
+  "url": "https://www.meiji.ac.jp/museum/"
+ },
+ {
+  "id": "v-09370e3f55af",
+  "name": "昭和館",
+  "short": "昭和館",
+  "kind": "資料館",
+  "area": "千代田区九段南",
+  "lat": 35.69511,
+  "lng": 139.75091,
+  "url": "https://www.showakan.go.jp/"
+ },
+ {
+  "id": "v-a03d9233f729",
+  "name": "東京国立博物館",
+  "short": "東博",
+  "kind": "博物館",
+  "area": "台東区上野公園",
+  "lat": 35.71904,
+  "lng": 139.77597,
+  "url": "https://www.tnm.jp/"
+ },
+ {
+  "id": "v-78f5fa81cb49",
+  "name": "東京国立近代美術館",
+  "short": "近美",
+  "kind": "美術館",
+  "area": "千代田区北の丸公園",
+  "lat": 35.69047,
+  "lng": 139.75451,
+  "url": "https://www.momat.go.jp/"
+ },
+ {
+  "id": "v-17c4ac53c9f8",
+  "name": "東京富士美術館",
+  "short": "東京富士美術館",
+  "kind": "美術館",
+  "area": "八王子市谷野町",
+  "lat": 35.68638,
+  "lng": 139.32945,
+  "url": "https://www.fujibi.or.jp/"
+ },
+ {
+  "id": "v-a0f0a7de9303",
+  "name": "東京都写真美術館",
+  "short": "都写美",
+  "kind": "美術館",
+  "area": "渋谷区恵比寿",
+  "lat": 35.64154,
+  "lng": 139.7134,
+  "url": "https://topmuseum.jp/"
+ },
+ {
+  "id": "v-9b6dbb52d3b3",
+  "name": "東京都庭園美術館",
+  "short": "庭園美術館",
+  "kind": "庭園・建築",
+  "area": "港区白金台",
+  "lat": 35.63684,
+  "lng": 139.71928,
+  "url": "https://www.teien-art-museum.ne.jp/"
+ },
+ {
+  "id": "v-60d1151bced0",
+  "name": "東京都江戸東京博物館",
+  "short": "江戸博",
+  "kind": "博物館",
+  "area": "墨田区横網",
+  "lat": 35.69645,
+  "lng": 139.79608,
+  "url": "https://www.edo-tokyo-museum.or.jp/"
+ },
+ {
+  "id": "v-8fabc6b63078",
+  "name": "東京都現代美術館",
+  "short": "MOT",
+  "kind": "美術館",
+  "area": "江東区三好",
+  "lat": 35.67978,
+  "lng": 139.80879,
+  "url": "https://www.mot-art-museum.jp/"
+ },
+ {
+  "id": "v-22b72ee964e3",
+  "name": "東洋文庫ミュージアム",
+  "short": "東洋文庫",
+  "kind": "博物館",
+  "area": "文京区本駒込",
+  "lat": 35.73125,
+  "lng": 139.74871,
+  "url": "https://toyo-bunko.or.jp/museum/"
+ },
+ {
+  "id": "v-0fe70cb34e09",
+  "name": "松岡美術館",
+  "short": "松岡美術館",
+  "kind": "美術館",
+  "area": "港区白金台",
+  "lat": 35.64002,
+  "lng": 139.72181,
+  "url": "https://www.matsuoka-museum.jp/"
+ },
+ {
+  "id": "v-668f46a6d4fd",
+  "name": "根津美術館",
+  "short": "根津美術館",
+  "kind": "美術館",
+  "area": "港区南青山",
+  "lat": 35.66224,
+  "lng": 139.71726,
+  "url": "https://www.nezu-muse.or.jp/"
+ },
+ {
+  "id": "v-4a4a12576d09",
+  "name": "横山大観記念館",
+  "short": "大観記念館",
+  "kind": "記念館",
+  "area": "台東区池之端",
+  "lat": 35.71212,
+  "lng": 139.76822,
+  "url": "https://taikan.tokyo/"
+ },
+ {
+  "id": "v-517faecc92ec",
+  "name": "横浜市歴史博物館",
+  "short": "横浜歴博",
+  "kind": "博物館",
+  "area": "横浜市都筑区中川中央",
+  "lat": 35.5446,
+  "lng": 139.576,
+  "url": "https://www.rekihaku.city.yokohama.jp/"
+ },
+ {
+  "id": "v-866387b0e75c",
+  "name": "横浜美術館",
+  "short": "横浜美術館",
+  "kind": "美術館",
+  "area": "横浜市西区みなとみらい",
+  "lat": 35.4571,
+  "lng": 139.63053,
+  "url": "https://yokohama.art.museum/"
+ },
+ {
+  "id": "v-9463babe08f2",
+  "name": "横須賀美術館",
+  "short": "横須賀美術館",
+  "kind": "美術館",
+  "area": "横須賀市鴨居（観音崎）",
+  "lat": 35.25967,
+  "lng": 139.73801,
+  "url": "https://www.yokosuka-moa.jp/"
+ },
+ {
+  "id": "v-c077ffcc55c4",
+  "name": "永青文庫",
+  "short": "永青文庫",
+  "kind": "美術館",
+  "area": "文京区目白台",
+  "lat": 35.71311,
+  "lng": 139.72336
+ },
+ {
+  "id": "v-273b93156069",
+  "name": "江戸東京たてもの園",
+  "short": "たてもの園",
+  "kind": "庭園・建築",
+  "area": "小金井市桜町（都立小金井公園内）",
+  "lat": 35.71637,
+  "lng": 139.51274,
+  "url": "https://www.tatemonoen.jp/"
+ },
+ {
+  "id": "v-9feafe3e730b",
+  "name": "江東区芭蕉記念館",
+  "short": "芭蕉記念館",
+  "kind": "記念館",
+  "area": "江東区常盤",
+  "lat": 35.68613,
+  "lng": 139.79409,
+  "url": "https://www.kcf.or.jp/basho/"
+ },
+ {
+  "id": "v-3e72e5492f6c",
+  "name": "河井寛次郎記念館",
+  "short": "寛次郎記念館",
+  "kind": "記念館",
+  "area": "京都市東山区五条坂",
+  "lat": 34.99357,
+  "lng": 135.77438,
+  "url": "https://www.kanjiro.jp/"
+ },
+ {
+  "id": "v-2b0ba9b2619d",
+  "name": "消防博物館",
+  "short": "消防博物館",
+  "kind": "博物館",
+  "area": "新宿区四谷",
+  "lat": 35.68814,
+  "lng": 139.71994,
+  "url": "https://www.tfd.metro.tokyo.lg.jp/hp-kouhouka/shobohaku/"
+ },
+ {
+  "id": "v-1c6b75d47e22",
+  "name": "田端文士村記念館",
+  "short": "田端文士村",
+  "kind": "記念館",
+  "area": "北区田端",
+  "lat": 35.73847,
+  "lng": 139.75926,
+  "url": "https://kitabunka.or.jp/tabata/"
+ },
+ {
+  "id": "v-ce1db45e4695",
+  "name": "町田市立国際版画美術館",
+  "short": "版画美術館",
+  "kind": "美術館",
+  "area": "町田市原町田（芹ヶ谷公園内）",
+  "lat": 35.54404,
+  "lng": 139.45503,
+  "url": "https://hanga-museum.jp/"
+ },
+ {
+  "id": "v-aa280eb55c0a",
+  "name": "皇居三の丸尚蔵館",
+  "short": "尚蔵館",
+  "kind": "博物館",
+  "area": "千代田区皇居東御苑",
+  "lat": 35.68652,
+  "lng": 139.75891,
+  "url": "https://shozokan.nich.go.jp/"
+ },
+ {
+  "id": "v-506b259b546c",
+  "name": "相模原市立博物館",
+  "short": "相模原博物館",
+  "kind": "博物館",
+  "area": "相模原市中央区高根",
+  "lat": 35.55931,
+  "lng": 139.39308,
+  "url": "https://sagamiharacitymuseum.jp/"
+ },
+ {
+  "id": "v-2f70dfc5196b",
+  "name": "神奈川県立歴史博物館",
+  "short": "県立歴史博物館",
+  "kind": "博物館",
+  "area": "横浜市中区南仲通",
+  "lat": 35.44912,
+  "lng": 139.63623,
+  "url": "https://ch.kanagawa-museum.jp/"
+ },
+ {
+  "id": "v-76c0e240a005",
+  "name": "神奈川県立生命の星・地球博物館",
+  "short": "生命の星",
+  "kind": "博物館",
+  "area": "小田原市入生田",
+  "lat": 35.23939,
+  "lng": 139.12158,
+  "url": "https://nh.kanagawa-museum.jp/"
+ },
+ {
+  "id": "v-2104c034be67",
+  "name": "神奈川県立近代美術館 葉山",
+  "short": "近美 葉山",
+  "kind": "美術館",
+  "area": "三浦郡葉山町一色",
+  "lat": 35.26507,
+  "lng": 139.5767,
+  "url": "https://www.moma.pref.kanagawa.jp/"
+ },
+ {
+  "id": "v-bbd19a32c28a",
+  "name": "菊池寛実記念智美術館",
+  "short": "智美術館",
+  "kind": "美術館",
+  "area": "港区虎ノ門",
+  "lat": 35.66604,
+  "lng": 139.74461,
+  "url": "https://www.musee-tomo.or.jp/"
+ },
+ {
+  "id": "v-fdf1c17afbc5",
+  "name": "角川武蔵野ミュージアム",
+  "short": "角川武蔵野",
+  "kind": "博物館",
+  "area": "埼玉県所沢市東所沢和田",
+  "lat": 35.79769,
+  "lng": 139.50787,
+  "url": "https://kadcul.com/"
+ },
+ {
+  "id": "v-eb5c14c4231a",
+  "name": "調布市武者小路実篤記念館",
+  "short": "実篤記念館",
+  "kind": "記念館",
+  "area": "調布市若葉町",
+  "lat": 35.65681,
+  "lng": 139.58128,
+  "url": "https://www.mushakoji.org/"
+ },
+ {
+  "id": "v-67093c6927aa",
+  "name": "鎌倉国宝館",
+  "short": "鎌倉国宝館",
+  "kind": "博物館",
+  "area": "鎌倉市雪ノ下（鶴岡八幡宮境内）",
+  "lat": 35.32467,
+  "lng": 139.55701,
+  "url": "https://www.city.kamakura.kanagawa.jp/kokuhoukan/"
+ },
+ {
+  "id": "v-3e71e0fe0c9a",
+  "name": "長谷川町子記念館",
+  "short": "町子記念館",
+  "kind": "記念館",
+  "area": "世田谷区桜新町",
+  "lat": 35.62797,
+  "lng": 139.64319,
+  "url": "https://www.hasegawamachiko.jp/"
+ }
+]

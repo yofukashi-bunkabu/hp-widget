@@ -44,3 +44,10 @@ python3 build.py
 python3 -m http.server 8765
 ```
 http://localhost:8765/dev/test.html を開く（`python3 build.py --today 2026-12-20` で日付を変えて試せる）。
+
+## 夜更けの地図（site/map/、2026-11-18〜）
+参加者が、行った美術館・博物館の記録と口コミを地図に残すページ。公開先は https://yofukashi-bunkabu.github.io/hp-widget/map/
+- 地図は OpenStreetMap（Leaflet）。館の一覧は `site/map/venues.json`（イベント候補ダッシュボードの `venues` から、名前・種類・地域・緯度経度・公式URLだけを書き出したもの）
+- ログインと保存は Firebase（Google ログイン＋Firestore）。準備の手順は `FIREBASE.md`、守りは `firestore.rules`
+- `site/map/firebase-config.js` が空のあいだは試し表示（ログインはまねだけ、記録はその端末の中だけ）
+- 口コミは「自分だけ」が既定。「参加者に公開」は、合言葉を入れた参加者だけが読める。名前・メールは保存しない（`site/map/privacy.html`）

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>夜更けの地図｜夜更文化部</title>
+<meta name="description" content="夜更文化部の参加者が、行った美術館・博物館の記録と口コミを地図に残す場所です。">
+<meta name="theme-color" content="#1C2338">
+<link rel="icon" href="logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700;900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<style>
+/* 夜更文化部のブランドカラー（PROJECT.md 2026-11-01）：濃藍 55／生成り 30／夜霧 10／月光 5。月光は「一滴」だけ */
+:root {
+  --ai: #1C2338;      /* 濃藍：地 */
+  --ai2: #252d46;     /* 濃藍の一段明るい面 */
+  --ai3: #313a57;     /* 線 */
+  --kinari: #F2EDE3;  /* 生成り：文字・紙 */
+  --gekko: #E6CF86;   /* 月光：差し色 */
+  --yogiri: #8C93A3;  /* 夜霧：補助の文字 */
+  --sumi: #5E6578;
+  --bad: #e39a8a;
+  --font: "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { background: var(--ai); color: var(--kinari); font-family: var(--font); font-size: 15px; line-height: 1.7; font-feature-settings: "palt"; display: grid; grid-template-rows: auto minmax(0, 1fr); }
+[hidden] { display: none !important; }
+button, input, textarea, select { font: inherit; color: inherit; }
+a { color: var(--gekko); }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible { outline: 2px solid var(--gekko); outline-offset: 2px; }
+
+header { display: flex; align-items: center; gap: 12px; padding: 10px max(16px, env(safe-area-inset-right)) 10px max(16px, env(safe-area-inset-left)); padding-top: max(10px, env(safe-area-inset-top)); border-bottom: 1px solid var(--ai3); min-width: 0; }
+.logo { height: 44px; width: auto; flex: none; }
+.ttl { display: grid; line-height: 1.25; min-width: 0; }
+.ttl b { font-weight: 900; font-size: 19px; letter-spacing: 0.06em; white-space: nowrap; }
+.ttl small { color: var(--yogiri); font-size: 11px; letter-spacing: 0.12em; }
+.who { margin-left: auto; display: flex; gap: 8px; align-items: center; flex: none; }
+.btn { border: 1px solid var(--kinari); background: transparent; border-radius: 999px; padding: 5px 14px; cursor: pointer; font-size: 13px; font-weight: 700; white-space: nowrap; }
+.btn.fill { background: var(--kinari); color: var(--ai); }
+.btn.moon { background: var(--gekko); border-color: var(--gekko); color: var(--ai); }
+.btn.ghost { border-color: var(--ai3); color: var(--yogiri); }
+.btn.danger { border-color: var(--bad); color: var(--bad); }
+.btn:disabled { opacity: 0.4; cursor: default; }
+
+main { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 390px; min-height: 0; }
+#map { min-height: 0; background: var(--ai); }
+/* 地図を夜の色に：白黒にして反転し、濃藍に寄せる（タイルの著作権表示は残す） */
+.leaflet-tile-pane { filter: grayscale(1) invert(1) brightness(0.78) contrast(0.92) sepia(0.35) hue-rotate(185deg) saturate(1.4); }
+.leaflet-container { font-family: var(--font); background: var(--ai); }
+.leaflet-control-attribution { background: rgba(28,35,56,0.8) !important; color: var(--yogiri) !important; font-size: 10px; }
+.leaflet-control-attribution a { color: var(--kinari) !important; }
+.leaflet-bar a { background: var(--ai2); color: var(--kinari); border-color: var(--ai3); }
+.leaflet-bar a:hover { background: var(--ai3); color: var(--kinari); }
+.pin { display: grid; place-items: center; border-radius: 50%; font-size: 11px; font-weight: 700; transition: transform 0.15s; }
+.pin.none { width: 12px; height: 12px; background: var(--ai); border: 2px solid var(--yogiri); }
+.pin.pub { width: 22px; height: 22px; background: var(--ai); border: 2px solid var(--kinari); color: var(--kinari); }
+.pin.mine { width: 24px; height: 24px; background: var(--gekko); border: 2px solid var(--ai); color: var(--ai); box-shadow: 0 0 0 2px var(--gekko); }
+.pin.new { width: 18px; height: 18px; background: transparent; border: 2px dashed var(--gekko); }
+.pin.sel { transform: scale(1.35); }
+.leaflet-tooltip.vname { background: var(--ai); color: var(--kinari); border: 1px solid var(--ai3); font-family: var(--font); font-size: 12px; padding: 2px 8px; box-shadow: none; }
+.leaflet-tooltip.vname::before { display: none; }
+
+aside { background: var(--ai); border-left: 1px solid var(--ai3); overflow: auto; min-height: 0; display: grid; align-content: start; }
+.tabs { display: grid; grid-template-columns: repeat(3, 1fr); position: sticky; top: 0; background: var(--ai); z-index: 2; border-bottom: 1px solid var(--ai3); }
+.tab { border: 0; background: transparent; padding: 11px 4px 9px; cursor: pointer; color: var(--yogiri); font-weight: 700; font-size: 14px; border-bottom: 2px solid transparent; }
+.tab[aria-selected="true"] { color: var(--kinari); border-bottom-color: var(--gekko); }
+.pane { padding: 16px; display: grid; gap: 14px; align-content: start; min-width: 0; }
+.demo { background: var(--ai2); border: 1px dashed var(--gekko); border-radius: 10px; padding: 8px 12px; font-size: 12px; color: var(--kinari); }
+h2 { margin: 0; font-size: 21px; font-weight: 900; line-height: 1.4; letter-spacing: 0.02em; overflow-wrap: anywhere; }
+.sub { color: var(--yogiri); font-size: 13px; overflow-wrap: anywhere; }
+.lead { font-size: 14px; color: var(--kinari); }
+.muted { color: var(--yogiri); font-size: 13px; }
+.card { border-top: 1px solid var(--ai3); padding-top: 12px; display: grid; gap: 4px; min-width: 0; }
+.card .h { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; }
+.card .h b { font-size: 15px; overflow-wrap: anywhere; }
+.card .m { color: var(--yogiri); font-size: 12px; }
+.card .t { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
+.stars { color: var(--gekko); letter-spacing: 0.1em; font-size: 13px; }
+.tag { font-size: 11px; border: 1px solid var(--yogiri); color: var(--yogiri); border-radius: 999px; padding: 0 8px; }
+.tag.pub { border-color: var(--kinari); color: var(--kinari); }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.linkbtn { background: none; border: 0; padding: 0; color: var(--gekko); cursor: pointer; font-size: 13px; text-decoration: underline; text-underline-offset: 3px; }
+.linkbtn.bad { color: var(--bad); }
+form { display: grid; gap: 12px; background: var(--ai2); border-radius: 12px; padding: 14px; }
+label { display: grid; gap: 4px; font-size: 13px; color: var(--yogiri); }
+input[type=text], input[type=date], textarea, select { width: 100%; background: var(--ai); border: 1px solid var(--ai3); border-radius: 8px; padding: 8px 10px; font-size: 15px; color: var(--kinari); }
+textarea { min-height: 110px; resize: vertical; line-height: 1.7; }
+.starpick { display: flex; gap: 2px; }
+.starpick button { background: none; border: 0; font-size: 24px; line-height: 1; color: var(--sumi); cursor: pointer; padding: 2px; }
+.starpick button.on { color: var(--gekko); }
+.vis { display: grid; gap: 6px; }
+.vis label { display: flex; gap: 8px; align-items: flex-start; color: var(--kinari); font-size: 14px; cursor: pointer; }
+.vis small { display: block; color: var(--yogiri); font-size: 12px; }
+.msg { font-size: 13px; color: var(--gekko); }
+.msg.bad { color: var(--bad); }
+.search { position: relative; }
+.hits { display: grid; gap: 0; margin-top: 4px; border: 1px solid var(--ai3); border-radius: 8px; overflow: hidden; }
+.hits button { text-align: left; background: var(--ai); border: 0; border-top: 1px solid var(--ai3); padding: 8px 10px; cursor: pointer; font-size: 14px; }
+.hits button:first-child { border-top: 0; }
+.hits button:hover { background: var(--ai2); }
+.count { display: flex; gap: 18px; }
+.count div { display: grid; }
+.count b { font-size: 30px; font-weight: 900; line-height: 1.1; color: var(--gekko); }
+.count span { font-size: 12px; color: var(--yogiri); }
+footer.small { font-size: 11px; color: var(--yogiri); padding: 0 16px 20px; }
+
+/* スマホ：地図を上、パネルを下に */
+@media (max-width: 760px) {
+  main { grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(220px, 42vh) minmax(0, 1fr); }
+  aside { border-left: 0; border-top: 1px solid var(--ai3); }
+  .ttl small { display: none; }
+  .logo { height: 36px; }
+  .ttl b { font-size: 16px; }
+}
+</style>
+</head>
+<body>
+<header>
+  <img class="logo" src="logo.svg" alt="夜更文化部">
+  <div class="ttl"><b>夜更けの地図</b><small>行った館を、ひとことと一緒に</small></div>
+  <div class="who">
+    <button class="btn fill" id="signin" hidden>Googleでログイン</button>
+    <button class="btn ghost" id="signout" hidden>ログアウト</button>
+  </div>
+</header>
+<main>
+  <div id="map" role="region" aria-label="美術館・博物館の地図"></div>
+  <aside>
+    <div class="tabs" role="tablist">
+      <button class="tab" role="tab" data-tab="place" aria-selected="true">館</button>
+      <button class="tab" role="tab" data-tab="mine" aria-selected="false">わたしの記録</button>
+      <button class="tab" role="tab" data-tab="all" aria-selected="false">みんなの口コミ</button>
+    </div>
+    <div id="pane" class="pane" aria-live="polite"></div>
+    <footer class="small">地図 © OpenStreetMap の協力者。<a href="privacy.html">口コミと個人情報の扱い</a>。各館の公式のページではありません。</footer>
+  </aside>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
