@@ -82,12 +82,6 @@
 
 .host .top { display: grid; grid-template-columns: 112px minmax(0, 1fr); gap: 20px; align-items: center; margin-bottom: 20px; }
 .host .pic { width: 112px; height: 112px; border-radius: 50%; overflow: hidden; background: var(--ai); border: 3px solid var(--ai); box-shadow: 0 0 0 1px var(--kinari), 0 0 0 2px #1c233833; }
-.host .cols { display: grid; grid-template-columns: minmax(0, 1fr); gap: 30px; align-items: center; }
-@media (min-width: 760px) { .host .cols { grid-template-columns: minmax(0, 1fr) 300px; gap: 40px; } }
-.host-fig { position: relative; margin: 0; background: var(--ai); aspect-ratio: 4 / 5; overflow: hidden; display: flex; align-items: flex-end; justify-content: center; width: 100%; max-width: 340px; justify-self: center; }
-.host-fig .ring { position: absolute; width: 84%; aspect-ratio: 1; left: 8%; top: 14%; border: 1px solid var(--gekko); border-radius: 50%; opacity: .55; }
-.host-fig img { position: relative; width: 82%; height: auto; display: block; }
-.host-fig figcaption { position: absolute; left: 14px; top: 12px; font-family: var(--lab); font-size: 10px; letter-spacing: .22em; color: var(--yogiri); }
 .host .pic img { width: 100%; height: 100%; object-fit: cover; }
 .host .top p { font-size: 14.5px; margin: 0; }
 .host ul { list-style: none; margin: 0 0 20px; padding: 0; }
@@ -209,8 +203,6 @@
 <section class="sec host" id="host">
   <div class="wrap">
     <div class="head"><h2>主催のこと</h2><span class="lab">HOST</span></div>
-    <div class="cols">
-    <div>
     <div class="top">
       <div class="pic"><img src="assets/host.png" alt="主催のたいまつ" loading="lazy"></div>
       <p>はじめまして、夜更文化部をはじめた、たいまつです。27歳、ふだんはWEBマーケティング（広告運用）の仕事をしています。</p>
@@ -221,9 +213,6 @@
       <li>鶏胸肉料理が好きな人。サウナとシーシャとカラオケも好きです</li>
     </ul>
     <p>身体を鍛えるのと同じように、頭のほうも少しずつ鍛えたくて、この部活をはじめました。会は、わたしが自分で行きたい館をめぐる道に、一緒に乗ってもらう形です。だから、参加が一人でも会は開きます。筋トレの話も、本の話も、どちらでも歓迎です。</p>
-    </div>
-    <figure class="host-fig"><div class="ring"></div><img src="assets/host_full.webp" alt="ぶかぶかになったズボンを手で広げて笑う、主催のたいまつ" loading="lazy" width="560" height="709"><figcaption>HOST — TAIMATSU</figcaption></figure>
-    </div>
   </div>
 </section>
 
