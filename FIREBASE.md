@@ -1,5 +1,9 @@
 # 夜更けの地図：Firebase の準備（秋輝が1回だけ行う）
 
+> **2026-11-18 済み**（秋輝と Claude で Chrome から実施）：部の Google アカウント（yofukashi.bunkabu）でプロジェクト `yofukashi-bunkabu` を作成（Spark・無料、アナリティクス／Gemini／デベロッパープログラムはオフ）。Google ログインを有効化（公開名「夜更文化部」、サポートメールは部の Gmail）、承認済みドメインに `yofukashi-bunkabu.github.io`、Firestore（Standard・東京 asia-northeast1・本番モード）に `firestore.rules` を公開、ウェブアプリ「夜更けの地図」を登録して `site/map/firebase-config.js` に設定を入れた。同日、秋輝の個人アカウントでログインし、管理者（admins）に登録済み。記録の保存・読み出し・削除が本番で動くことも確かめた（仮の記録は消した）。
+>
+> **ログインのつまずき**：Google の画面は「アカウントを選ぶ」→「yofukashi-bunkabu.firebaseapp.com にログイン（名前・メールを共有）」の2段。2段目で「次へ」を押さないとログインが終わらない。参加者に案内するときは「2回目の画面で『次へ』」と書く。
+
 `site/map/` は、Firebase の設定（`site/map/firebase-config.js`）が空のあいだ「試し表示」で動きます。
 本番にするには、秋輝さんの Google アカウントで次を行います（所要20分ほど・無料の Spark プラン）。
 Claude はアカウントやプロジェクトを作れないので、ここだけは秋輝さんの操作です。終わったら 5. の値を Claude に渡してください。
