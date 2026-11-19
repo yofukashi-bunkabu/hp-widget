@@ -26,7 +26,14 @@
 .why div { border-top: 2px solid var(--ai); padding-top: 10px; }
 .why b { display: block; font-size: 15.5px; font-weight: 500; margin-bottom: 4px; }
 .why span { font-family: var(--goth); font-size: 13px; line-height: 1.9; color: var(--haiai); }
+.yo-card { display: grid; gap: 10px; background: #fff; color: var(--ai); text-decoration: none; padding: 18px 20px 20px; border: 1px solid #1c233822; max-width: 520px; }
+.yo-card:hover { border-color: var(--ai); }
+.yo-strip { display: flex; justify-content: space-between; gap: 8px; font: 500 10px var(--lab); letter-spacing: .12em; border-bottom: 1px solid var(--ai); padding-bottom: 6px; }
+.yo-years { font: 400 56px/.86 "Anton", var(--num); }
+.yo-t { font: 900 19px/1.45 var(--min); }
+.yo-more { font: 700 13px var(--goth); border-top: 1px solid #1c233822; padding-top: 10px; }
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap">
 </head>
 <body>
 <!--@bar-->
@@ -50,41 +57,14 @@
 
 <section class="sec paper">
   <div class="wrap">
-    <article class="sheet" aria-label="予習シートの見本 No.01">
-      <div class="top"><span>YOFUKASHI BUNKABU — No.01</span><span>2026.11.20 FRI</span></div>
-      <h2>東京都美術館の100年と、5つの「読み方」</h2>
-      <p class="ex">東京都美術館「はじまりをひらく 東京都美術館の100年」「あなたが世界を読むために」</p>
-
-      <h3>ひとことで言うと</h3>
-      <p>今年で100歳になる美術館の記念展を2つ。前半は「この建物そのものの100年」を写真や図面で、後半は5人の作り手が世界をどう「読んだ」かを作品で観ます。</p>
-
-      <h3>見どころ3つ</h3>
-      <ol>
-        <li><div><b>100年展・第1章「旧館と新館」</b>：柱が並ぶ最初の建物の絵葉書と、1975年に建った新館の図面・航空写真。展示室がなぜ地下にあるのか、答えはこの章に。</div></li>
-        <li><div><b>世界を読む展「光で読む」</b>：ジャコメッティの《裸婦小立像》は高さ9cmほど。少しかがんで、正面と横から。光で見え方が変わるのを確かめる1点です。</div></li>
-        <li><div><b>世界を読む展「自然から読む」</b>：砂澤ビッキの木彫《神の舌》は高さ2m超え。表面に残る鑿（のみ）の跡を近くで。9cmとの差も味わってください。</div></li>
-      </ol>
-
-      <h3>3行でわかる背景</h3>
-      <ul>
-        <li>1926年5月1日、「東京府美術館」として上野に開館。日本で最初の公立美術館です</li>
-        <li>建てるお金100万円を寄付したのは、石炭業で財を成した佐藤慶太郎（1868–1940）</li>
-        <li>世界を読む展の5人は、表現も時代もばらばら。詩人の谷川俊太郎と彫刻家の砂澤ビッキは同じ1931年生まれ</li>
-      </ul>
-
-      <h3>感想タイムの問い</h3>
-      <p class="q">光・時・言葉・自然・全身。5つの「読み方」のうち、いちばん自分に近かったのはどれ？</p>
-
-      <h3>行く人へのメモ</h3>
-      <ul class="memo">
-        <li>所要時間の目安：2展で55分（100年展20分→世界を読む展35分）／観覧料：無料</li>
-        <li>展示室のメモは鉛筆だけ（ボールペン・シャーペンは不可。鉛筆はスタッフに借りられます）</li>
-        <li>撮影は控えるのが館の基本。違うときは会場に表示があります</li>
-        <li>読まなくても大丈夫。気になった1点があれば、それで十分です</li>
-      </ul>
-
-      <p class="src">確かめた日：2026-11-13　出典：東京都美術館 公式サイト（https://www.tobikan.jp/2026_archives/ 、https://www.tobikan.jp/waysofreading/ ほか）<br>この見本は会の前日に送ったものと同じ内容です。開館時間・料金などは、行く前に公式サイトでお確かめください。</p>
-    </article>
+    <div class="head"><h2>見本：No.01 東京都美術館</h2><span class="lab">SAMPLE</span></div>
+    <a class="yo-card" href="01/">
+      <span class="yo-strip"><span>YOFUKASHI BUNKABU — No.01</span><span>2026.11.20 FRI</span></span>
+      <span class="yo-years">1926<br>2026</span>
+      <span class="yo-t">東京都美術館の100年と、5つの「読み方」</span>
+      <span class="yo-more">予習シートを読む →</span>
+    </a>
+    <p class="muted" style="margin-top:14px">会の前日に、参加する方へこのページのリンクをお送りしています。スマホで読みやすい形です。</p>
   </div>
 </section>
 

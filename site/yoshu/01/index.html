@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<!--@head-->
+<title>予習シート No.01 東京都美術館｜夜更文化部</title>
+<meta name="description" content="夜更文化部 No.01（2026年11月20日）の予習シート。東京都美術館の100年と、5つの「読み方」。行きの電車で5分で読めます。">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap">
+<style>
+/* 予習シート：会場で使うワークシート（案D 美術館の雑誌）と対になる「読みもの」。
+   巨大な年号＋白黒の外観写真＋細い罫線と英字の小見出し＋数字の帯。スマホで電車の中で読む前提で縦に流す */
+body { background: #fff; }
+.sheet { max-width: 720px; margin: 0 auto; padding: 18px max(18px, env(safe-area-inset-left)) 40px; color: var(--ai); font-family: var(--min); }
+.strip { display: flex; justify-content: space-between; gap: 8px; white-space: nowrap; font: 500 10.5px/1.4 var(--lab); letter-spacing: .12em; border-bottom: 1px solid var(--ai); padding-bottom: 7px; }
+@media (max-width: 420px) { .strip span:last-child { display: none; } }
+.kicker { display: flex; align-items: center; gap: 10px; margin-top: 18px; font: 500 10.5px var(--lab); letter-spacing: .2em; color: var(--haiai); }
+.kicker b { font: 900 12px var(--min); letter-spacing: .12em; color: var(--ai); border: 1px solid var(--ai); padding: 2px 9px 3px; }
+.top { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 16px; align-items: end; margin-top: 12px; }
+.years { font: 400 clamp(58px, 17vw, 96px)/.84 "Anton", var(--num); letter-spacing: -.01em; }
+.years small { display: block; font: 500 9.5px var(--lab); letter-spacing: .14em; color: var(--haiai); margin-bottom: 8px; }
+.logo { width: 52px; justify-self: end; align-self: start; }
+h1 { font: 900 clamp(23px, 6.2vw, 32px)/1.38 var(--min); letter-spacing: .01em; margin: 16px 0 0; word-break: auto-phrase; }
+.lead { font-size: 15px; line-height: 2; margin: 10px 0 0; }
+.photo { position: relative; aspect-ratio: 16 / 8; margin: 20px calc(-1 * max(18px, env(safe-area-inset-left))) 0; background: var(--ai) center 40% / cover no-repeat; filter: grayscale(1) contrast(1.05); }
+.photo::after { content: ""; position: absolute; inset: 0; background: var(--ai); mix-blend-mode: screen; opacity: .22; }
+.credit { font: 400 10px var(--goth); color: var(--yogiri); text-align: right; margin-top: 4px; }
+@media (min-width: 760px) { .photo { margin-left: 0; margin-right: 0; } }
+
+.sec { padding: 0; margin-top: 34px; }
+.sh { display: flex; align-items: baseline; gap: 12px; border-top: 2px solid var(--ai); padding-top: 8px; margin-bottom: 14px; }
+.sh i { font: 500 10.5px var(--lab); font-style: normal; letter-spacing: .18em; color: var(--haiai); }
+.sh h2 { margin: 0; font: 900 18px var(--min); letter-spacing: .04em; }
+
+/* 見どころ：番号と「数字の手がかり」を大きく */
+.hl { display: grid; gap: 0; }
+.hl article { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 4px 14px; padding: 14px 0 16px; border-bottom: 1px solid #1c233826; }
+.hl .no { font: 400 13px var(--lab); letter-spacing: .1em; color: var(--haiai); }
+.hl .big { grid-row: 2 / span 2; font: 400 34px/1 "Anton", var(--num); align-self: start; }
+.hl .big small { display: block; font: 700 10.5px/1.5 var(--min); letter-spacing: 0; color: var(--haiai); margin-top: 4px; }
+.hl h3 { margin: 0; font: 900 16px/1.5 var(--min); grid-column: 2; }
+.hl p { margin: 2px 0 0; font-size: 14.5px; line-height: 1.95; grid-column: 2; }
+.hl .where { grid-column: 2; font: 500 10.5px var(--lab); letter-spacing: .08em; color: var(--haiai); }
+
+/* 背景：数字の帯＋3行 */
+.nums { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--ai); }
+.num b { display: block; white-space: nowrap; font: 400 clamp(26px, 7vw, 34px)/1 "Anton", var(--num); }
+.num b .jp { font: 900 .55em var(--min); margin: 0 .05em; vertical-align: .14em; }
+.num > span { font-size: 11.5px; line-height: 1.5; color: var(--haiai); display: block; margin-top: 4px; }
+.bg { list-style: none; margin: 12px 0 0; padding: 0; }
+.bg li { font-size: 14.5px; line-height: 1.95; padding: 6px 0 6px 18px; position: relative; }
+.bg li::before { content: ""; position: absolute; left: 2px; top: 17px; width: 8px; height: 1px; background: var(--ai); }
+
+/* 問い：濃藍の箱 */
+.q { background: var(--ai); color: var(--kinari); padding: 22px 22px 24px; position: relative; overflow: hidden; }
+.q::after { content: ""; position: absolute; right: -78px; top: -78px; width: 150px; height: 150px; border: 1px solid var(--gekko); border-radius: 50%; opacity: .45; }
+.q i { font: 500 10.5px var(--lab); font-style: normal; letter-spacing: .18em; color: var(--gekko); }
+.q p { position: relative; margin: 10px 0 0; font: 700 clamp(18px, 5vw, 22px)/1.75 var(--min); }
+.q small { display: block; margin-top: 12px; font: 400 12.5px/1.8 var(--goth); color: #d9d4ca; }
+
+/* メモ：ワークシートと同じ「月光の縦線＋英字ラベル」 */
+.memo { display: grid; gap: 10px; margin: 0; }
+.memo div { display: grid; grid-template-columns: 74px minmax(0, 1fr); gap: 12px; align-items: baseline; border-left: 3px solid var(--gekko); padding-left: 10px; }
+.memo dt { font: 500 10.5px var(--lab); letter-spacing: .1em; color: var(--haiai); }
+.memo dd { margin: 0; font-size: 14px; line-height: 1.85; }
+
+.end { margin-top: 34px; border-top: 1px solid var(--ai); padding-top: 12px; font: 400 11px/1.9 var(--goth); color: var(--haiai); overflow-wrap: anywhere; }
+.end a { color: inherit; }
+.end .sig { display: flex; justify-content: space-between; align-items: center; margin-top: 14px; font: 500 10.5px var(--lab); letter-spacing: .14em; color: var(--ai); }
+.end .sig a { font: 700 12.5px var(--min); letter-spacing: .04em; text-decoration: none; border-bottom: 1px solid var(--ai); }
+@media print { .sheet { max-width: none; } .photo { margin: 16px 0 0; } }
+</style>
+</head>
+<body>
+<article class="sheet">
+  <div class="strip"><span>YOFUKASHI BUNKABU — No.01</span><span>2026.11.20 FRI</span><span>東京都美術館</span></div>
+  <div class="kicker"><b>予習シート</b><span>READ IN 5 MIN</span></div>
+
+  <div class="top">
+    <div class="years"><small>TOKYO METROPOLITAN ART MUSEUM</small>1926<br>2026</div>
+    <img class="logo" src="../../assets/logo_ai.svg" alt="夜更文化部">
+  </div>
+  <h1>東京都美術館の100年と、<br>5つの「読み方」</h1>
+  <p class="lead">今年で100歳になる美術館の記念展を2つ。前半は「この建物そのものの100年」を写真や図面で、後半は5人の作り手が世界をどう「読んだ」かを作品で観ます。</p>
+
+  <div class="photo" style="background-image:url('../../assets/hero_tobikan.jpg')" role="img" aria-label="東京都美術館の外観"></div>
+  <p class="credit">写真：東京都美術館（Matthide127 / Wikimedia Commons, CC0）</p>
+
+  <section class="sec">
+    <div class="sh"><i>01 — HIGHLIGHTS</i><h2>見どころ3つ</h2></div>
+    <div class="hl">
+      <article><span class="no">01</span><span class="big">1975<small>新館の年</small></span><h3>100年展・第1章「旧館と新館」</h3><p>柱が並ぶ最初の建物の絵葉書と、1975年に建った新館の図面・航空写真。展示室がなぜ地下にあるのか、答えはこの章に。</p></article>
+      <article><span class="no">02</span><span class="big">9<span style="font-size:.6em">cm</span><small>しゃがんで観る</small></span><h3>世界を読む展「光で読む」</h3><p>ジャコメッティの《裸婦小立像》は高さ9cmほど。少しかがんで、正面と横から。光で見え方が変わるのを確かめる1点です。</p></article>
+      <article><span class="no">03</span><span class="big">2<span style="font-size:.6em">m+</span><small>近くで観る</small></span><h3>世界を読む展「自然から読む」</h3><p>砂澤ビッキの木彫《神の舌》は高さ2m超え。表面に残る鑿（のみ）の跡を近くで。9cmとの差も味わってください。</p></article>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><i>02 — BACKGROUND</i><h2>3行でわかる背景</h2></div>
+    <div class="nums">
+      <div class="num"><b>1926</b><span>「東京府美術館」として上野に開館</span></div>
+      <div class="num"><b>100<span class="jp">万円</span></b><span>建てるお金を寄付した人がいた</span></div>
+      <div class="num"><b>1931</b><span>谷川俊太郎と砂澤ビッキが生まれた年</span></div>
+    </div>
+    <ul class="bg">
+      <li>1926年5月1日、「東京府美術館」として上野に開館。日本で最初の公立美術館です</li>
+      <li>建てるお金100万円を寄付したのは、石炭業で財を成した佐藤慶太郎（1868–1940）</li>
+      <li>世界を読む展の5人は、表現も時代もばらばら。詩人の谷川俊太郎と彫刻家の砂澤ビッキは同じ1931年生まれ</li>
+    </ul>
+  </section>
+
+  <section class="sec">
+    <div class="q"><i>03 — QUESTION｜感想タイムの問い</i><p>光・時・言葉・自然・全身。<br>5つの「読み方」のうち、いちばん自分に近かったのはどれ？</p><small>観たあとの感想の時間に、この問いから話し始めます。</small></div>
+  </section>
+
+  <section class="sec">
+    <div class="sh"><i>04 — MEMO</i><h2>行く人へのメモ</h2></div>
+    <dl class="memo">
+      <div><dt>TIME</dt><dd>2展で55分ほど（100年展20分 → 世界を読む展35分）</dd></div>
+      <div><dt>FEE</dt><dd>2展とも観覧無料</dd></div>
+      <div><dt>ENTRY</dt><dd>展示室への入室は19:30まで。ギャラリーA・Bは地下3階、Cは地下2階</dd></div>
+      <div><dt>PENCIL</dt><dd>展示室のメモは鉛筆だけ（ボールペン・シャープペンシルは不可。鉛筆はスタッフに借りられます）</dd></div>
+      <div><dt>PHOTO</dt><dd>撮影は控えるのが館の基本。違うときは会場に表示があります</dd></div>
+      <div><dt>LOCKER</dt><dd>100円玉があとで戻るタイプ。傘は入口の傘立てへ</dd></div>
+    </dl>
+  </section>
+
+  <footer class="end">
+    確かめた日：2026-11-13　出典：東京都美術館 公式サイト（https://www.tobikan.jp/2026_archives/ ／ https://www.tobikan.jp/waysofreading/ ほか）。開館時間などは行く前に公式サイトでお確かめください。東京都美術館の公式イベントではありません。
+    <div class="sig"><span>YOFUKASHI BUNKABU</span><a href="../../">夜更文化部</a></div>
+  </footer>
+</article>
+</body>
+</html>
