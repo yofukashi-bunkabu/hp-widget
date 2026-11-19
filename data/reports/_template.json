@@ -1,0 +1,20 @@
+{
+ "no": "00",
+ "published": false,
+ "_使い方": "会が終わったら、この形で data/reports/<No>.json を作り published を true にする。写真は site/assets/reports/ に置き、参加者の顔・名前は載せない",
+ "event_id": "",
+ "date": "2026-01-01",
+ "title": "題（／で改行）",
+ "place": "館の名前",
+ "lead": "どんな会だったかを2〜3行で",
+ "photos": [
+  {
+   "src": "assets/reports/<No>_1.jpg",
+   "alt": "",
+   "cap": ""
+  }
+ ],
+ "talk": [
+  "感想の時間に出た話を1行ずつ（名前は出さない）"
+ ]
+}

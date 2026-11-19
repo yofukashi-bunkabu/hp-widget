@@ -15,6 +15,7 @@ import json
 import re
 import shutil
 import ssl
+import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 from datetime import date, datetime, timedelta, timezone
@@ -62,6 +63,7 @@ def load_events(today, fee=None):
             "no": e["no"],
             "date": e["date"],
             "start": e.get("start", ""),
+            "end": e.get("end", ""),
             "title": e["title"],
             "place": e.get("place", ""),
             "genre": e.get("genre", ""),
@@ -155,11 +157,37 @@ def next1_html(up, cfg):
 </div>'''
 
 
-def ev_card(e, cfg, past=False):
+def gcal_url(e):
+    """Google カレンダーに予定を入れるリンク。終わりの時刻は events.json の end（なければ開始の2時間後）"""
+    if not e.get("start"):
+        return ""
+    st = datetime.fromisoformat(f'{e["date"]}T{e["start"]}')
+    en = datetime.fromisoformat(f'{e["date"]}T{e["end"]}') if e.get("end") else st + timedelta(hours=2)
+    f = lambda t: t.strftime("%Y%m%dT%H%M%S")
+    details = "夜更文化部の会です。予約・くわしくは " + (e.get("peatix") or e.get("tunagate") or "")
+    q = urllib.parse.urlencode({"action": "TEMPLATE", "text": f'夜更文化部 No.{e["no"]} {e["title"].replace("／", "")}',
+                                "dates": f"{f(st)}/{f(en)}", "ctz": "Asia/Tokyo", "location": e.get("place", ""), "details": details})
+    return "https://calendar.google.com/calendar/render?" + q
+
+
+def ev_links(e, base, past):
+    """会のカードの下に付ける小さなリンク：予習シート・レポート・カレンダー"""
+    out = []
+    no = str(e["no"])
+    if (ROOT / "data/yoshu" / f"{no}.json").exists():
+        out.append(f'<a href="{base}yoshu/{esc(no)}/">予習シートを読む</a>')
+    if past and (ROOT / "data/reports" / f"{no}.json").exists() and json.loads((ROOT / "data/reports" / f"{no}.json").read_text(encoding="utf-8")).get("published"):
+        out.append(f'<a href="{base}reports/{esc(no)}/">開催レポート</a>')
+    if not past and gcal_url(e):
+        out.append(f'<a href="{esc(gcal_url(e))}" target="_blank" rel="noopener">カレンダーに追加</a>')
+    return f'<p class="ev-links">{"".join(out)}</p>' if out else ""
+
+
+def ev_card(e, cfg, past=False, base="{{base}}"):
     d, jd = jdate(e["date"])
     no = f"No.{esc(e['no'])}"
     meta = " ・ ".join(x for x in [esc(e["genre"]), price_text(e) if not past else ""] if x)
-    btns = "" if past else f'<div class="btns">{ev_buttons(e, cfg)}</div>'
+    btns = ev_links(e, base, past) + ("" if past else f'<div class="btns">{ev_buttons(e, cfg)}</div>')
     return f'''<article class="ev{' past' if past else ''}">
   <div class="ev-d"><b>{d.month}.{d.day:02d}</b><span>{WD[d.weekday()]}{(" " + esc(e["start"])) if e["start"] else ""}</span></div>
   <div class="ev-b"><span class="lab">{no}</span><h3>{title_br(e["title"])}</h3><p class="pl">{esc(e["place"])}</p>{f'<p class="meta">{meta}</p>' if meta else ""}{btns}</div>
@@ -188,6 +216,139 @@ def stats_html(held, venues, cfg):
         return ""
     return (f'<div class="stats"><div class="stat"><b>{held}</b><span>これまでの開催</span></div>'
             f'<div class="stat"><b>{venues}</b><span>記録した館</span></div></div>')
+
+
+def jsonld(upcoming, cfg):
+    """検索エンジン向けの「イベント」の印（schema.org/Event）。これからの会だけ"""
+    items = []
+    for e in upcoming:
+        st = f'{e["date"]}T{e["start"] or "10:00"}:00+09:00'
+        ev = {"@type": "Event", "name": f'夜更文化部 No.{e["no"]} {e["title"].replace("／", "")}', "startDate": st,
+              "eventStatus": "https://schema.org/EventScheduled",
+              "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+              "location": {"@type": "Place", "name": e["place"], "address": {"@type": "PostalAddress", "addressRegion": "東京都", "addressCountry": "JP"}},
+              "organizer": {"@type": "Organization", "name": "夜更文化部", "url": cfg["site_url"]},
+              "image": cfg["site_url"] + "assets/ogp.jpg",
+              "description": "社会人のための鑑賞の部活。予習シートを1枚持って行き、それぞれのペースで観て、観たあとに少しだけ感想を話します。"}
+        if e.get("end"):
+            ev["endDate"] = f'{e["date"]}T{e["end"]}:00+09:00'
+        if isinstance(e.get("price"), int) and e.get("peatix"):
+            ev["offers"] = {"@type": "Offer", "price": e["price"], "priceCurrency": "JPY", "url": e["peatix"], "availability": "https://schema.org/InStock"}
+        items.append(ev)
+    if not items:
+        return ""
+    data = {"@context": "https://schema.org", "@graph": items}
+    return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False).replace("</", "<\\/") + "</script>"
+
+
+def br(t):
+    return esc(t).replace("／", "<br>")
+
+
+def render_yoshu(d, parts):
+    """data/yoshu/<no>.json から予習シートのページ（/yoshu/<no>/）を作る"""
+    dt = date.fromisoformat(d["date"])
+    hl = "".join(
+        f'<article><span class="no">{i + 1:02d}</span><span class="big">{esc(h["big"])}'
+        + (f'<span style="font-size:.6em">{esc(h["unit"])}</span>' if h.get("unit") else "")
+        + f'<small>{esc(h.get("cap", ""))}</small></span><h3>{esc(h["title"])}</h3><p>{esc(h["text"])}</p></article>'
+        for i, h in enumerate(d["highlights"]))
+    nums = "".join(
+        f'<div class="num"><b>{esc(n["big"])}' + (f'<span class="jp">{esc(n["jp"])}</span>' if n.get("jp") else "")
+        + f'</b><span>{esc(n["cap"])}</span></div>' for n in d.get("nums", []))
+    bg = "".join(f"<li>{esc(x)}</li>" for x in d["background"])
+    memo = "".join(f"<div><dt>{esc(k)}</dt><dd>{esc(v)}</dd></div>" for k, v in d["memo"])
+    years = "<br>".join(esc(y) for y in d.get("years", [])) or f"{dt.month}.{dt.day:02d}"
+    photo = (f'<div class="photo" style="background-image:url(\'../../{esc(d["photo"])}\')" role="img" aria-label="{esc(d["venue"])}の外観"></div>'
+             f'<p class="credit">{esc(d.get("photo_credit", ""))}</p>') if d.get("photo") else ""
+    head = parts["head"].replace("{{base}}", "../../")
+    return f"""<!doctype html>
+<html lang="ja">
+<head>
+{head}
+<title>予習シート No.{esc(d["no"])} {esc(d["venue"])}｜夜更文化部</title>
+<meta name="description" content="夜更文化部 No.{esc(d["no"])}（{dt.year}年{dt.month}月{dt.day}日）の予習シート。{esc(d["title"].replace("／", ""))}。行きの電車で5分で読めます。">
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&display=swap">
+<link rel="stylesheet" href="../../assets/yoshu.css">
+</head>
+<body>
+<article class="sheet">
+  <div class="strip"><span>YOFUKASHI BUNKABU — No.{esc(d["no"])}</span><span>{dt.year}.{dt.month:02d}.{dt.day:02d} {WD_EN[dt.weekday()][:3]}</span><span>{esc(d["venue"])}</span></div>
+  <div class="kicker"><b>予習シート</b><span>READ IN 5 MIN</span></div>
+  <div class="top">
+    <div class="years"><small>{esc(d.get("venue_en", ""))}</small>{years}</div>
+    <img class="logo" src="../../assets/logo_ai.svg" alt="夜更文化部">
+  </div>
+  <h1>{br(d["title"])}</h1>
+  <p class="lead">{esc(d["lead"])}</p>
+  {photo}
+  <section class="sec">
+    <div class="sh"><i>01 — HIGHLIGHTS</i><h2>見どころ3つ</h2></div>
+    <div class="hl">{hl}</div>
+  </section>
+  <section class="sec">
+    <div class="sh"><i>02 — BACKGROUND</i><h2>3行でわかる背景</h2></div>
+    {f'<div class="nums">{nums}</div>' if nums else ''}
+    <ul class="bg">{bg}</ul>
+  </section>
+  <section class="sec">
+    <div class="q"><i>03 — QUESTION｜感想タイムの問い</i><p>{br(d["question"])}</p><small>観たあとの感想の時間に、この問いから話し始めます。</small></div>
+  </section>
+  <section class="sec">
+    <div class="sh"><i>04 — MEMO</i><h2>行く人へのメモ</h2></div>
+    <dl class="memo">{memo}</dl>
+  </section>
+  <footer class="end">
+    確かめた日：{esc(d["checked"])}　出典：{esc(d["sources"])}。開館時間などは行く前に公式サイトでお確かめください。{esc(d["venue"])}の公式イベントではありません。
+    <div class="sig"><span>YOFUKASHI BUNKABU</span><a href="../../">夜更文化部</a></div>
+  </footer>
+</article>
+</body>
+</html>
+"""
+
+
+def render_report(r, parts):
+    """data/reports/<no>.json から開催レポート（/reports/<no>/）を作る。published が true のものだけ"""
+    dt = date.fromisoformat(r["date"])
+    base = "../../"
+    talk = "".join(f"<li>{esc(t)}</li>" for t in r.get("talk", []))
+    photos = "".join(f'<figure><img src="{base}{esc(p["src"])}" alt="{esc(p.get("alt", ""))}" loading="lazy"><figcaption>{esc(p.get("cap", ""))}</figcaption></figure>' for p in r.get("photos", []))
+    links = []
+    if (ROOT / "data/yoshu" / f'{r["no"]}.json').exists():
+        links.append(f'<a class="btn" href="{base}yoshu/{esc(r["no"])}/">この回の予習シート</a>')
+    links.append(f'<a class="btn" href="{base}events/">会の一覧</a>')
+    page = f"""<!doctype html>
+<html lang="ja">
+<head>
+{parts["head"]}
+<title>開催レポート No.{esc(r["no"])} {esc(r["title"].replace("／", ""))}｜夜更文化部</title>
+<meta name="description" content="{esc(r.get("lead", ""))}">
+<meta property="og:title" content="開催レポート No.{esc(r["no"])}｜夜更文化部">
+<style>
+.rep-photos {{ display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); margin: 6px 0 26px; }}
+.rep-photos img {{ width: 100%; aspect-ratio: 4 / 3; object-fit: cover; filter: grayscale(.15); }}
+.rep-photos figcaption {{ font-family: var(--goth); font-size: 12px; color: var(--haiai); margin-top: 6px; }}
+.talk {{ list-style: none; padding: 0; margin: 0 0 24px; }}
+.talk li {{ font-size: 16px; line-height: 1.9; padding: 12px 0 12px 22px; border-bottom: 1px dashed #1c233833; position: relative; }}
+.talk li::before {{ content: "“"; position: absolute; left: 0; top: 6px; font: 400 28px var(--num); color: #b0902e; }}
+</style>
+</head>
+<body>
+{parts["bar"]}
+<div class="ph"><div class="wrap"><span class="lab">REPORT — No.{esc(r["no"])}</span><h1>{br(r["title"])}</h1><p>{dt.year}年{dt.month}月{dt.day}日（{WD[dt.weekday()]}）　{esc(r["place"])}</p></div></div>
+<section class="sec"><div class="wrap">
+  <p style="font-size:16px">{esc(r.get("lead", ""))}</p>
+  {f'<div class="rep-photos">{photos}</div>' if photos else ''}
+  {f'<div class="head"><h2>感想の時間に出た話</h2><span class="lab">TALK</span></div><ul class="talk">{talk}</ul>' if talk else ''}
+  <div class="btns">{"".join(links)}</div>
+</div></section>
+{parts["foot"]}
+</body>
+</html>
+"""
+    return page.replace("{{base}}", base)
 
 
 def render_pages(ctx):
@@ -247,6 +408,7 @@ def main():
         "journal3": journal_html(articles, cfg, cfg["max_articles"]),
         "journal": journal_html(articles, cfg),
         "stats": stats_html(held, len(series), cfg),
+        "jsonld": jsonld(upcoming, cfg),
         "count_up": str(len(upcoming)),
         "count_past": str(len(past)),
         "updated": now.strftime("%Y年%-m月%-d日"),
@@ -259,6 +421,19 @@ def main():
         shutil.rmtree(OUT)
     shutil.copytree(ROOT / "site", OUT, ignore=shutil.ignore_patterns("_parts", ".DS_Store"))
     render_pages(ctx)
+    parts = {p.stem: p.read_text(encoding="utf-8") for p in (ROOT / "site/_parts").glob("*.html")}
+    for f in sorted((ROOT / "data/yoshu").glob("*.json")):
+        d = json.loads(f.read_text(encoding="utf-8"))
+        out = OUT / "yoshu" / d["no"] / "index.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(render_yoshu(d, parts), encoding="utf-8")
+    for f in sorted((ROOT / "data/reports").glob("*.json")) if (ROOT / "data/reports").exists() else []:
+        r = json.loads(f.read_text(encoding="utf-8"))
+        if not r.get("published"):
+            continue
+        out = OUT / "reports" / r["no"] / "index.html"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(render_report(r, parts), encoding="utf-8")
     (OUT / "data.json").write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")
     print(f"{today}: 次の会 {len(upcoming)}件／終わった会 {len(past)}件（開催 {held}回）／記事 {len(articles)}本 → {OUT}")
 

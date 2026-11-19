@@ -17,6 +17,11 @@
 | `/widget/` | 埋め込み用の小さな窓（旧 hp-widget のトップ。いまは使っていない） |
 
 ## 作り
+- **予習シート**：`data/yoshu/<No>.json` から `/yoshu/<No>/` を作る。JSON は `../夜更文化部/運営/予習シート/作る.py <会のフォルダ>/予習シート.md` が書き出す（同時に A4 の印刷用 PDF も）。JSON がある会は、会の一覧のカードに「予習シートを読む」が出る
+- **開催レポート**：`data/reports/<No>.json`（ひな形は `_template.json`）を作って `published: true` にすると `/reports/<No>/` ができ、「これまでの会」のカードに「開催レポート」が出る。写真は `site/assets/reports/`、参加者の顔・名前は載せない
+- **カレンダーに追加**：これからの会のカードに Google カレンダーのリンク。終わりの時刻は `events.json` の `end`（なければ開始の2時間後）
+- **検索向けの印**：トップと会の一覧に schema.org の Event（JSON-LD）を入れている
+- **共有画像（OGP）**：`site/assets/ogp.jpg`（1200×630）。作り直すときは `tools/ogp.html` を Chrome で 1200×630 に撮る
 - `site/` を `_site/` に写し、ページの中の `<!--@名前-->` を `build.py` が置き換える（`head`・`bar`・`foot` は `site/_parts/` の部品、`next1`・`next3`・`upcoming`・`past`・`journal3`・`journal`・`stats` などは中身）
 - 共通の見た目は `site/assets/site.css`。色はブランドカラー（濃藍・生成り・月光・夜霧・灰藍）
 

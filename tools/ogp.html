@@ -1,0 +1,21 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@500;900&family=DM+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+/* 共有したときに出る画像（OGP 1200×630）。python3 tools/make_ogp.py で site/assets/ogp.png に書き出す */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1200px;height:630px}
+body{background:#1C2338;color:#F2EDE3;font-family:"Zen Old Mincho",serif;font-feature-settings:"palt";position:relative;overflow:hidden}
+.photo{position:absolute;inset:0;background:url(../site/assets/hero_tobikan.jpg) center 40%/cover;filter:grayscale(1) brightness(.85);opacity:.22}
+.ring{position:absolute;right:120px;top:50%;width:470px;height:470px;margin-top:-235px;border:2px solid #E6CF86;border-radius:50%;opacity:.45}
+.logo{position:absolute;left:84px;top:78px;width:150px;height:150px;border:2px solid #E6CF86;border-radius:50%;display:grid;place-items:center}
+.logo img{height:112px}
+.copy{position:absolute;left:84px;top:270px;font:900 54px/1.45 "Zen Old Mincho";letter-spacing:.04em}
+.copy small{display:block;font:500 26px/1.6 "Zen Old Mincho";color:#C9CCD6;letter-spacing:.06em;margin-top:14px}
+.name{position:absolute;right:84px;bottom:64px;text-align:right;font:900 40px "Zen Old Mincho";letter-spacing:.3em}
+.name span{display:block;font:500 18px "DM Mono";letter-spacing:.3em;color:#E6CF86;margin-top:8px}
+</style></head><body>
+<div class="photo"></div><div class="ring"></div>
+<div class="logo"><img src="../site/assets/logo.svg" alt=""></div>
+<p class="copy">忙しい毎日でも、<br>教養という“ゆとり”を持ちたい。<small>美術館・博物館へ週に1回。社会人の鑑賞の部活です。</small></p>
+<div class="name">夜更文化部<span>YOFUKASHI BUNKABU</span></div>
+</body></html>

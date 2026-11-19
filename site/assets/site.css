@@ -82,6 +82,9 @@ p { margin: 0 0 16px; }
 .ev-b .meta { margin: 2px 0 0; font-family: var(--goth); font-size: 12px; color: var(--haiai); }
 .dark .ev-b .meta { color: var(--yogiri); }
 .ev .btn { padding: 9px 16px; font-size: 12.5px; }
+.ev-links { margin: 8px 0 0; display: flex; flex-wrap: wrap; gap: 4px 16px; font-family: var(--goth); font-size: 12.5px; }
+.ev-links a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.dark .ev-links a { color: var(--gekko); }
 .ev.past { opacity: .85; border-left-color: var(--yogiri); }
 @media (max-width: 480px) {
   .ev { grid-template-columns: 64px minmax(0, 1fr); gap: 12px; padding: 14px; }
